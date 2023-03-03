@@ -51,6 +51,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuNuevo_SalirActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -61,6 +64,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnuReportes_Historial">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imagenes/historial.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Historial"/>
               </Properties>
               <Events>
@@ -69,6 +75,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnuReportes_Usuarios">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imagenes/usuarios_1.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Usuarios"/>
               </Properties>
               <Events>
@@ -84,6 +93,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnuAyuda_AcercaDe">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imagenes/acerca_de.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Acerca de"/>
               </Properties>
               <Events>

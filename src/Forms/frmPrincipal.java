@@ -99,12 +99,18 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         mnuNuevo_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrar_sesion.png"))); // NOI18N
         mnuNuevo_Salir.setText("Salir");
+        mnuNuevo_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuNuevo_SalirActionPerformed(evt);
+            }
+        });
         mnuNuevo.add(mnuNuevo_Salir);
 
         jMenuBar1.add(mnuNuevo);
 
         mnuReportes.setText("Reportes");
 
+        mnuReportes_Historial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/historial.png"))); // NOI18N
         mnuReportes_Historial.setText("Historial");
         mnuReportes_Historial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +119,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         mnuReportes.add(mnuReportes_Historial);
 
+        mnuReportes_Usuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios_1.png"))); // NOI18N
         mnuReportes_Usuarios.setText("Usuarios");
         mnuReportes_Usuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +132,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         mnuAyuda.setText("Ayuda");
 
+        mnuAyuda_AcercaDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/acerca_de.png"))); // NOI18N
         mnuAyuda_AcercaDe.setText("Acerca de");
         mnuAyuda_AcercaDe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,6 +199,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         frmAcercaDe about = new frmAcercaDe();
         about.setVisible(true);
     }//GEN-LAST:event_mnuAyuda_AcercaDeActionPerformed
+
+    private void mnuNuevo_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuNuevo_SalirActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_mnuNuevo_SalirActionPerformed
 
     /**
      * @param args the command line arguments
