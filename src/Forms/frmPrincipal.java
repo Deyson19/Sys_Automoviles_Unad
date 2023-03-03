@@ -5,6 +5,9 @@
  */
 package Forms;
 
+import Forms.panelPrincipal.Ayuda.frmAcercaDe;
+import Forms.panelPrincipal.Reportes.frmHistorial;
+import Forms.panelPrincipal.Reportes.frmUsuarios;
 import Forms.panelPrincipal.frmNuevoPropietario;
 import Forms.panelPrincipal.frmNuevoUsuario;
 import Forms.panelPrincipal.frmNuevoVehiculo;
@@ -41,8 +44,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuNuevo_Salir = new javax.swing.JMenuItem();
         mnuReportes = new javax.swing.JMenu();
-        mnuReportes_Compras = new javax.swing.JMenuItem();
-        mnuReportes_Ventas = new javax.swing.JMenuItem();
+        mnuReportes_Historial = new javax.swing.JMenuItem();
+        mnuReportes_Usuarios = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
         mnuAyuda_AcercaDe = new javax.swing.JMenuItem();
 
@@ -102,17 +105,32 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         mnuReportes.setText("Reportes");
 
-        mnuReportes_Compras.setText("Historial");
-        mnuReportes.add(mnuReportes_Compras);
+        mnuReportes_Historial.setText("Historial");
+        mnuReportes_Historial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuReportes_HistorialActionPerformed(evt);
+            }
+        });
+        mnuReportes.add(mnuReportes_Historial);
 
-        mnuReportes_Ventas.setText("Usuarios");
-        mnuReportes.add(mnuReportes_Ventas);
+        mnuReportes_Usuarios.setText("Usuarios");
+        mnuReportes_Usuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuReportes_UsuariosActionPerformed(evt);
+            }
+        });
+        mnuReportes.add(mnuReportes_Usuarios);
 
         jMenuBar1.add(mnuReportes);
 
         mnuAyuda.setText("Ayuda");
 
         mnuAyuda_AcercaDe.setText("Acerca de");
+        mnuAyuda_AcercaDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAyuda_AcercaDeActionPerformed(evt);
+            }
+        });
         mnuAyuda.add(mnuAyuda_AcercaDe);
 
         jMenuBar1.add(mnuAyuda);
@@ -153,6 +171,26 @@ public class frmPrincipal extends javax.swing.JFrame {
         dpnEscritorio.add(nPropietario);
         nPropietario.setVisible(true);
     }//GEN-LAST:event_mnuNuevo_PropietarioActionPerformed
+
+    private void mnuReportes_HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuReportes_HistorialActionPerformed
+        // TODO add your handling code here:
+        frmHistorial miHistorial = new frmHistorial();
+        dpnEscritorio.add(miHistorial);
+        miHistorial.setVisible(true);
+    }//GEN-LAST:event_mnuReportes_HistorialActionPerformed
+
+    private void mnuReportes_UsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuReportes_UsuariosActionPerformed
+        // TODO add your handling code here:
+        frmUsuarios listaUsuarios = new frmUsuarios();
+        dpnEscritorio.add(listaUsuarios);
+        listaUsuarios.setVisible(true);
+    }//GEN-LAST:event_mnuReportes_UsuariosActionPerformed
+
+    private void mnuAyuda_AcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAyuda_AcercaDeActionPerformed
+        // TODO add your handling code here:
+        frmAcercaDe about = new frmAcercaDe();
+        about.setVisible(true);
+    }//GEN-LAST:event_mnuAyuda_AcercaDeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,7 +240,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuNuevo_Usuario;
     private javax.swing.JMenuItem mnuNuevo_Vehiculo;
     private javax.swing.JMenu mnuReportes;
-    private javax.swing.JMenuItem mnuReportes_Compras;
-    private javax.swing.JMenuItem mnuReportes_Ventas;
+    private javax.swing.JMenuItem mnuReportes_Historial;
+    private javax.swing.JMenuItem mnuReportes_Usuarios;
     // End of variables declaration//GEN-END:variables
 }

@@ -59,15 +59,21 @@
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuReportes_Compras">
+            <MenuItem class="javax.swing.JMenuItem" name="mnuReportes_Historial">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Historial"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuReportes_HistorialActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuReportes_Ventas">
+            <MenuItem class="javax.swing.JMenuItem" name="mnuReportes_Usuarios">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Usuarios"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuReportes_UsuariosActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -80,6 +86,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Acerca de"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuAyuda_AcercaDeActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
