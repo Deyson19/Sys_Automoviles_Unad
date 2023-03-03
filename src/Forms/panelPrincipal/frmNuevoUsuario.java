@@ -56,6 +56,7 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios_1.png"))); // NOI18N
 
         panelDatosUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos para el Usuario"));
@@ -72,7 +73,7 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
         lblRol.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblRol.setText("Rol del Usuario:");
 
-        cbRoles.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Usuario", "Propietario", "Empleado" }));
+        cbRoles.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Propietario", "Empleado" }));
 
         lblClaveUsuario.setBackground(new java.awt.Color(204, 204, 204));
         lblClaveUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N

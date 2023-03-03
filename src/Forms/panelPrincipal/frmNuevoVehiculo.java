@@ -60,6 +60,7 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
         setClosable(true);
         setForeground(new java.awt.Color(255, 255, 102));
         setIconifiable(true);
+        setMaximizable(true);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/coche.png"))); // NOI18N
 
         lblInformacion.setBackground(new java.awt.Color(153, 255, 204));
@@ -344,7 +345,7 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

@@ -4,6 +4,7 @@
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
       <Image iconType="3" name="/imagenes/usuarios_1.png"/>
     </Property>
@@ -164,11 +165,10 @@
         <Component class="javax.swing.JComboBox" name="cbRoles">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="3">
                 <StringItem index="0" value="Administrador"/>
-                <StringItem index="1" value="Usuario"/>
-                <StringItem index="2" value="Propietario"/>
-                <StringItem index="3" value="Empleado"/>
+                <StringItem index="1" value="Propietario"/>
+                <StringItem index="2" value="Empleado"/>
               </StringArray>
             </Property>
           </Properties>
