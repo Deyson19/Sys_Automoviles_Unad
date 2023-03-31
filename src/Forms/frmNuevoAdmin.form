@@ -24,39 +24,44 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Component id="lblIniciarSesion" pref="332" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnIngresar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblUsuario" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="imgLogin" min="-2" pref="140" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="231" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblPassword" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblUsuario" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPassword1" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jPasswordField1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtUsuario" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                      <Component id="imgLogin" min="-2" pref="140" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="lblIniciarSesion" min="-2" pref="142" max="-2" attributes="0"/>
-                              </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="txtConfirmaClave" alignment="0" pref="300" max="32767" attributes="0"/>
+                              <Component id="txtClave" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtUsuario" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="36" max="32767" attributes="0"/>
-                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnIngresar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnCrearAdmin" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -67,23 +72,27 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblIniciarSesion" min="-2" pref="36" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="imgLogin" min="-2" pref="128" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jPasswordField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtClave" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblPassword1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtConfirmaClave" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnIngresar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnCrearAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
           </Group>
@@ -93,7 +102,7 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="txtUsuario">
     </Component>
-    <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+    <Component class="javax.swing.JPasswordField" name="txtClave">
     </Component>
     <Component class="javax.swing.JLabel" name="lblPassword">
       <Properties>
@@ -108,7 +117,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Serif" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Usuario:"/>
+        <Property name="text" type="java.lang.String" value="Nombre Usuario:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblIniciarSesion">
@@ -117,18 +126,18 @@
           <Font name="Yu Gothic UI Semibold" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Iniciar Sesi&#xf3;n"/>
+        <Property name="text" type="java.lang.String" value="Crear nuevo usuario administrador"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnIngresar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="66" type="rgb"/>
+          <Color blue="33" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Serif" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ingresar"/>
+        <Property name="text" type="java.lang.String" value="Registrar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarActionPerformed"/>
@@ -155,19 +164,15 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnCrearAdmin">
+    <Component class="javax.swing.JLabel" name="lblPassword1">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="ff" red="cc" type="rgb"/>
-        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Serif" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Nuevo Admin"/>
+        <Property name="text" type="java.lang.String" value="Confirmar Contrase&#xf1;a:"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearAdminActionPerformed"/>
-      </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtConfirmaClave">
     </Component>
   </SubComponents>
 </Form>
