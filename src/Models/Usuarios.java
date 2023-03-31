@@ -3,14 +3,14 @@ package Models;
 //Clase para la tabla Users
 public class Usuarios {
    private int idUsuario;
-   private String Name,SurName,UserName,Password,Rol_Id;
+   private String Nombre,Apellido,NombreUsuario,Clave,Rol_Id;
 
-    public Usuarios(int idUsuario, String Name, String SurName, String UserName, String Password, String Rol_Id) {
+    public Usuarios(int idUsuario, String Nombre, String Apellido, String NombreUsuario, String Clave, String Rol_Id) {
         this.idUsuario = idUsuario;
-        this.Name = Name;
-        this.SurName = SurName;
-        this.UserName = UserName;
-        this.Password = Password;
+        this.Nombre = Nombre;
+        this.Apellido = Apellido;
+        this.NombreUsuario = NombreUsuario;
+        this.Clave = Clave;
         this.Rol_Id = Rol_Id;
     }
 
@@ -22,36 +22,36 @@ public class Usuarios {
         this.idUsuario = idUsuario;
     }
 
-    public String getName() {
-        return Name;
+    public String getNombre() {
+        return Nombre;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
-    public String getSurName() {
-        return SurName;
+    public String getApellido() {
+        return Apellido;
     }
 
-    public void setSurName(String SurName) {
-        this.SurName = SurName;
+    public void setApellido(String Apellido) {
+        this.Apellido = Apellido;
     }
 
-    public String getUserName() {
-        return UserName;
+    public String getNombreUsuario() {
+        return NombreUsuario;
     }
 
-    public void setUserName(String UserName) {
-        this.UserName = UserName;
+    public void setNombreUsuario(String NombreUsuario) {
+        this.NombreUsuario = NombreUsuario;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getClave() {
+        return Clave;
     }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public void setClave(String Clave) {
+        this.Clave = Clave;
     }
 
     public String getRol_Id() {
@@ -61,6 +61,8 @@ public class Usuarios {
     public void setRol_Id(String Rol_Id) {
         this.Rol_Id = Rol_Id;
     }
+
+    
    
    
 }
