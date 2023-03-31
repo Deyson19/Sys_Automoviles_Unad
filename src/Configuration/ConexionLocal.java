@@ -5,6 +5,7 @@
 package Configuration;
 
 import Interfaces.IGestorConexion;
+import Models.ErroresSistema;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,6 +26,8 @@ public class ConexionLocal implements IGestorConexion{
     private String usuario;
     private String clave;
     private Connection conexion;
+    
+    public ErroresSistema errores;
     
     public ConexionLocal(String url, String usuario, String clave) {
         this.url = url;
