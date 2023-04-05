@@ -20,26 +20,40 @@ import javax.swing.JOptionPane;
  *
  * @author Deyson Vente
  */
-public class ConexionLocal implements IGestorConexion{
+public class ConexionLocal implements IGestorConexion {
 
-    private String url;
-    private String usuario;
-    private String clave;
+    private String url = "jdbc:mysql://localhost/db_sys_vehiclesjava";
+    private String usuario = "root";
+    private String clave = "";
     private Connection conexion;
-    
+
     public ErroresSistema errores;
-    
-    public ConexionLocal(String url, String usuario, String clave) {
-        this.url = url;
-        this.usuario = usuario;
-        this.clave = clave;
+
+    public ConexionLocal() {
+
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public Connection getConexion() {
+        return conexion;
     }
 
     @Override
     public void conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection(url, usuario, clave);
+            conexion = DriverManager.getConnection(this.url, this.usuario, this.clave);
             System.out.println("Conectado a la base de datos local");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ConexionLocal.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,13 +72,16 @@ public class ConexionLocal implements IGestorConexion{
 
     @Override
     public boolean testearConexion() {
-        try {            
-            return !conexion.isClosed();            
+        try {
+            if (conexion != null && !conexion.isClosed()) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
-    
-    
+
 }

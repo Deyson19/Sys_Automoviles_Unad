@@ -4,6 +4,12 @@
  */
 package Forms;
 
+import Configuration.ConexionLocal;
+import Controller.UsuarioAdminController;
+import Models.UsuarioAdmin;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Deyson Vente
@@ -62,6 +68,11 @@ public class frmNuevoAdmin extends javax.swing.JFrame {
         btnCancelar.setBackground(new java.awt.Color(255, 0, 0));
         btnCancelar.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         btnCancelar.setText("Calcelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         imgLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login.png"))); // NOI18N
         imgLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -136,10 +147,41 @@ public class frmNuevoAdmin extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        frmPrincipal formPrincipal = new frmPrincipal();
-        formPrincipal.setLocationRelativeTo(null);
-        formPrincipal.setVisible(true);
+        UsuarioAdmin nAdmin = new UsuarioAdmin();
+        String usuario = txtUsuario.getText();
+        String clave = new String(txtClave.getPassword());
+        String confirmacion = new String(txtConfirmaClave.getPassword());
+
+        if (usuario.isEmpty() || clave.isEmpty() || confirmacion.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+        } else if (!clave.equals(confirmacion)) {
+            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+        } else {
+            // Los campos de entrada son válidos
+            // Continúa con el procesamiento de los datos
+            nAdmin.setUsuario(usuario);
+            nAdmin.setPassword(clave);
+
+            nAdmin.encriptaPassword(nAdmin);
+
+        }
+
+
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        limpiezaCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+    void limpiezaCampos() {
+        txtUsuario.setText(txtUsuario.getText().trim());
+        // Limpiar campos de contraseña de forma segura
+        char[] claveVacia = new char[txtClave.getPassword().length];
+        Arrays.fill(claveVacia, '0');
+        txtClave.setText("");
+        Arrays.fill(claveVacia, '0');
+        txtConfirmaClave.setText("");
+    }
 
     /**
      * @param args the command line arguments

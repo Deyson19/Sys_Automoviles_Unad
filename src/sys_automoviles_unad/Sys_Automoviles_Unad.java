@@ -2,6 +2,8 @@
 package sys_automoviles_unad;
 
 import Forms.frmLogin;
+import Models.UsuarioAdmin;
+import java.util.Scanner;
 
 /**
  *
@@ -14,9 +16,10 @@ public class Sys_Automoviles_Unad {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        frmLogin login = new frmLogin();
-        login.setLocationRelativeTo(null);
-        login.setVisible(true);
+//        frmLogin login = new frmLogin();
+//        login.setLocationRelativeTo(null);
+//        login.setVisible(true);
+
     }
     
 }

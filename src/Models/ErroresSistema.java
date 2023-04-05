@@ -4,34 +4,33 @@
  */
 package Models;
 
+import Configuration.ConexionLocal;
+import com.mysql.jdbc.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Deyson Vente
  */
 //Esta es una clase para capturar los errores que se manejen en el sistema
-public class ErroresSistema {
-    private int idErroresSistema;
+public class ErroresSistema {   
     private String CodigoMensaje,ClaseProveedora;
-    private int Usuario_id;
     private String DescripcionMensaje;
 
+    
     public ErroresSistema() {
     }
 
-    public ErroresSistema(int idErroresSistema, String CodigoMensaje, String ClaseProveedora, int Usuario_id, String DescripcionMensaje) {
-        this.idErroresSistema = idErroresSistema;
+    public ErroresSistema(String CodigoMensaje, String ClaseProveedora, String DescripcionMensaje) {
         this.CodigoMensaje = CodigoMensaje;
         this.ClaseProveedora = ClaseProveedora;
-        this.Usuario_id = Usuario_id;
         this.DescripcionMensaje = DescripcionMensaje;
-    }
-
-    public int getIdErroresSistema() {
-        return idErroresSistema;
-    }
-
-    public void setIdErroresSistema(int idErroresSistema) {
-        this.idErroresSistema = idErroresSistema;
     }
 
     public String getCodigoMensaje() {
@@ -50,14 +49,6 @@ public class ErroresSistema {
         this.ClaseProveedora = ClaseProveedora;
     }
 
-    public int getUsuario_id() {
-        return Usuario_id;
-    }
-
-    public void setUsuario_id(int Usuario_id) {
-        this.Usuario_id = Usuario_id;
-    }
-
     public String getDescripcionMensaje() {
         return DescripcionMensaje;
     }
@@ -66,5 +57,28 @@ public class ErroresSistema {
         this.DescripcionMensaje = DescripcionMensaje;
     }
     
+    public void insertarError(ErroresSistema error) {
+    try {
+        // Establecer la conexión a la base de datos
+        ConexionLocal cnLocal = new ConexionLocal();
+        cnLocal.conectar();
+        // Preparar la consulta SQL para insertar el error
+        PreparedStatement ps = cnLocal.getConexion().prepareStatement("INSERT INTO systemerrors (messageCode,ClassProvider,messageDescription) VALUES (?, ?, ?)");
+
+        // Establecer los parámetros de la consulta con los valores del objeto ErrorSistema
+        ps.setString(1, error.getCodigoMensaje());
+        ps.setString(2, error.getClaseProveedora());
+        ps.setString(3, error.getDescripcionMensaje());
+       
+        // Ejecutar la consulta
+        ps.executeUpdate();
+
+        // Cerrar la conexión y la consulta
+        ps.close();
+        cnLocal.desconectar();
+    } catch (SQLException ex) {
+        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+    }
+}
     
 }

@@ -68,6 +68,7 @@ public class frmLogin extends javax.swing.JFrame {
         btnCrearAdmin.setBackground(new java.awt.Color(204, 255, 51));
         btnCrearAdmin.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         btnCrearAdmin.setText("Nuevo Admin");
+        btnCrearAdmin.setEnabled(false);
         btnCrearAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearAdminActionPerformed(evt);
@@ -142,6 +143,9 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnCrearAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAdminActionPerformed
         // TODO add your handling code here:
+        frmNuevoAdmin nuevoAdmin = new frmNuevoAdmin();
+        this.hide();
+        nuevoAdmin.setVisible(true);
     }//GEN-LAST:event_btnCrearAdminActionPerformed
 
     /**

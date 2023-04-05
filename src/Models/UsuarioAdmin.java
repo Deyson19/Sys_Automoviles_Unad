@@ -4,46 +4,72 @@
  */
 package Models;
 
+import Configuration.EncriptadorPassword;
+import Controller.UsuarioAdminController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.security.NoSuchAlgorithmException;
+
 /**
  *
  * @author Deyson Vente
  */
-public class UsuarioAdmin {
-    private String nombre_usuario,clave_usuario;
-    private int idRol;
+public class UsuarioAdmin implements Interfaces.IEncriptarClave<UsuarioAdmin> {
+
+    private String usuario, password;
 
     public UsuarioAdmin() {
     }
 
-    public UsuarioAdmin(String nombre_usuario, String clave_usuario, int idRol) {
-        this.nombre_usuario = nombre_usuario;
-        this.clave_usuario = clave_usuario;
-        this.idRol = idRol;
+    public UsuarioAdmin(String usuario, String password) {
+        this.usuario = usuario;
+        this.password = password;
     }
 
-    public String getNombre_usuario() {
-        return nombre_usuario;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setNombre_usuario(String nombre_usuario) {
-        this.nombre_usuario = nombre_usuario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public String getClave_usuario() {
-        return clave_usuario;
+    public String getPassword() {
+        return password;
     }
 
-    public void setClave_usuario(String clave_usuario) {
-        this.clave_usuario = clave_usuario;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public int getIdRol() {
-        return idRol;
+    @Override
+    public void encriptaPassword(UsuarioAdmin nU) {
+       
+        String hashedPassword;
+        try {
+            hashedPassword = EncriptadorPassword.encrypt(this.password);
+            this.setPassword(hashedPassword);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuarioAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            ErroresSistema errorSistema = new ErroresSistema();
+            errorSistema.setCodigoMensaje("Error en la encriptación de la contraseña");
+            errorSistema.setClaseProveedora(this.getClass().getName());
+            errorSistema.setDescripcionMensaje(ex.getMessage());
+        }        
+        UsuarioAdminController usuarioAdC = new UsuarioAdminController();
+        usuarioAdC.creacion(nU);
+
     }
 
-    public void setIdRol(int idRol) {
-        this.idRol = idRol;
+    @Override
+    public void update(UsuarioAdmin obj) {
+        String hashedPassword;
+        try {
+            hashedPassword = EncriptadorPassword.encrypt(this.password);
+            this.setPassword(hashedPassword);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuarioAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    
+
 }

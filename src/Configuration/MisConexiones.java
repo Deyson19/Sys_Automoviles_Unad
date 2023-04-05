@@ -22,7 +22,7 @@ public class MisConexiones {
         String claveRemota = "admin.mrkurt95";
 
 //Probando las interfaces para las conexiones
-        ConexionLocal cnnLocal = new ConexionLocal(cadenaConexionLocal, usuarioLocal, claveLocal);
+        ConexionLocal cnnLocal = new ConexionLocal();
         cnnLocal.conectar();
         System.out.println("Conexion abierta");
         cnnLocal.testearConexion();

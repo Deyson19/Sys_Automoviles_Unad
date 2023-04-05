@@ -6,10 +6,7 @@ package Configuration;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,7 +24,6 @@ public class ConexionDb {
     public ConexionDb(String cadenaConexion,String usuarioDb,String claveDb) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.cadenaConexion = cadenaConexion;
             this.cadenaConexion = cadenaConexion;
             this.usuarioDb = usuarioDb;
             this.claveDb = claveDb;
