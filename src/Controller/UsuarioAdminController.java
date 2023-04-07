@@ -5,13 +5,11 @@
 package Controller;
 
 import Configuration.ConexionLocal;
-import Interfaces.IGestorDatos;
 import Models.ErroresSistema;
 import Models.UsuarioAdmin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,7 +27,6 @@ public class UsuarioAdminController {
 
         connNewAdmin.testearConexion();
         
-        //JOptionPane.showMessageDialog(null, "Datos ingresados."+nAdmin.getUsuario()+ "- Password"+nAdmin.getPassword());
     }
 
     public UsuarioAdminController() {

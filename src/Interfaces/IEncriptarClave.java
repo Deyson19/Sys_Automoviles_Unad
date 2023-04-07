@@ -7,8 +7,9 @@ package Interfaces;
 /**
  *
  * @author Deyson Vente
+ * @param <T>
  */
-public interface IEncriptarClave<U>{
-    public void encriptaPassword(U nU);
-    public void update(U obj);
+public interface IEncriptarClave<T>{
+    public void encriptaPassword(T nU);
+    public void update(T obj);
 }

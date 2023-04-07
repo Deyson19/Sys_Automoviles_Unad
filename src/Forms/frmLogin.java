@@ -4,6 +4,12 @@
  */
 package Forms;
 
+import Configuration.ConexionLocal;
+import Controller.LoginController;
+import Models.Login;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Deyson Vente
@@ -136,9 +142,37 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        frmPrincipal formPrincipal = new frmPrincipal();
-        formPrincipal.setLocationRelativeTo(null);
-        formPrincipal.setVisible(true);
+        LoginController hacerConsulta = new LoginController();
+        Login consultaUsuario = new Login();
+        String usuario = txtUsuario.getText();
+        String clave = new String(jPasswordField1.getPassword());
+
+        if (usuario.equals("")) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar un usuario válido " + usuario);
+            return;
+        }
+        if (clave.equals("")) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar una clave válida");
+            return;
+        }
+        consultaUsuario.setUsuario(usuario);
+        consultaUsuario.setClave(clave);
+        consultaUsuario.encriptaPassword(consultaUsuario);
+        
+        ConexionLocal cnnLocal = new ConexionLocal();
+        if (!hacerConsulta.consultarUsuario(consultaUsuario)) {
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecto");    
+            cnnLocal.desconectar();
+            return;
+        }
+        
+        cnnLocal.desconectar();
+        
+        frmPrincipal miPrincipal = new frmPrincipal();
+        //Maximizar ventana
+        miPrincipal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setVisible(false);
+        miPrincipal.setVisible(true);
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnCrearAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAdminActionPerformed

@@ -62,6 +62,7 @@ public class ConexionLocal implements IGestorConexion {
 
     @Override
     public void desconectar() {
+        conectar();
         try {
             conexion.close();
             System.out.println("Desconectado de la base de datos local");

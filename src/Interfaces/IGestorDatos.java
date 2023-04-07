@@ -7,11 +7,11 @@ package Interfaces;
 /**
  *
  * @author Deyson Vente
- * @param <O>
+ * @param <T>
  */
 public interface IGestorDatos<T> {
-    void creacion(T _t);
-    void actualizacion();
-    void eliminacion();
-    void recuperar();
+    void creacion(T objeto);
+    T lectura(int id);
+    void actualizacion(T objeto);
+    void eliminacion(int id);
 }
