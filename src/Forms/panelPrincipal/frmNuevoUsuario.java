@@ -4,8 +4,15 @@
  */
 package Forms.panelPrincipal;
 
+import Controller.RolesController;
+import Controller.UsuarioController;
+import DTOs.UsuariosDTO;
+import Models.Roles;
+import Models.Usuarios;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +25,25 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
      */
     public frmNuevoUsuario() {
         initComponents();
-       
+
+        RolesController rolControl = new RolesController();
+        List<Roles> listaRoles = rolControl.obtenerRoles();
+        for (Roles rol : listaRoles) {
+            cbRoles.addItem(rol.getNombreRol());
+            System.out.println("Rol: " + rol.getNombreRol());
+        }
+
+    }
+
+    public void limpiarCampos() {
+        txtNombre.setText("");
+        txtNombreUsuario.setText("");
+        txtApellido.setText("");
+        txtClave.setText("");
+        txtConfirmacion.setText("");
+        cbRoles.setSelectedIndex(0);
+        txtNombre.requestFocus();
+        txtBuscar_Id.setText("");
     }
 
     /**
@@ -43,6 +68,8 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
         txtClave = new javax.swing.JPasswordField();
         lblConfrClaveUsuario = new javax.swing.JLabel();
         txtConfirmacion = new javax.swing.JPasswordField();
+        lbl_IdBucar = new javax.swing.JLabel();
+        txtBuscar_Id = new javax.swing.JTextField();
         panelTop = new javax.swing.JPanel();
         lblInformacion = new javax.swing.JLabel();
         lbl_image = new javax.swing.JLabel();
@@ -70,10 +97,14 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
         lblNombreUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblNombreUsuario.setText("Nombre usuario");
 
+        txtNombreUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNombreUsuarioFocusGained(evt);
+            }
+        });
+
         lblRol.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblRol.setText("Rol del Usuario:");
-
-        cbRoles.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Propietario", "Empleado" }));
 
         lblClaveUsuario.setBackground(new java.awt.Color(204, 204, 204));
         lblClaveUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -83,31 +114,40 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
         lblConfrClaveUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblConfrClaveUsuario.setText("Confirmar contraseña:");
 
+        lbl_IdBucar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_IdBucar.setText("Buscar Id:");
+
         javax.swing.GroupLayout panelDatosUsuarioLayout = new javax.swing.GroupLayout(panelDatosUsuario);
         panelDatosUsuario.setLayout(panelDatosUsuarioLayout);
         panelDatosUsuarioLayout.setHorizontalGroup(
             panelDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatosUsuarioLayout.createSequentialGroup()
+            .addGroup(panelDatosUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblRol)
                     .addComponent(lblNombre)
-                    .addComponent(lblClaveUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbRoles, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtClave, javax.swing.GroupLayout.Alignment.LEADING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblConfrClaveUsuario)
-                    .addComponent(lblApellido)
-                    .addComponent(lblNombreUsuario))
+                    .addComponent(lblClaveUsuario)
+                    .addComponent(lbl_IdBucar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtConfirmacion)
-                    .addComponent(txtApellido)
-                    .addComponent(txtNombreUsuario))
+                    .addGroup(panelDatosUsuarioLayout.createSequentialGroup()
+                        .addGroup(panelDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbRoles, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtClave, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblConfrClaveUsuario)
+                            .addComponent(lblApellido)
+                            .addComponent(lblNombreUsuario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtConfirmacion)
+                            .addComponent(txtApellido)
+                            .addComponent(txtNombreUsuario)))
+                    .addGroup(panelDatosUsuarioLayout.createSequentialGroup()
+                        .addComponent(txtBuscar_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelDatosUsuarioLayout.setVerticalGroup(
@@ -130,7 +170,11 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
                     .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblConfrClaveUsuario)
                     .addComponent(txtConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_IdBucar)
+                    .addComponent(txtBuscar_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         lblInformacion.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
@@ -274,7 +318,7 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
                 .addComponent(panelDatosUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         panelDatosUsuario.getAccessibleContext().setAccessibleName(getName());
@@ -284,23 +328,158 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
 
+        String idUsuario = txtBuscar_Id.getText();
+
+        if (idUsuario.equals("")) {
+            JOptionPane.showMessageDialog(null, "Debes ingresar un ID de Usuario");
+            return;
+        }
+
+        UsuarioController controller = new UsuarioController();
+        UsuariosDTO traerDatos = controller.lectura(Integer.parseInt(idUsuario));
+
+        if (traerDatos != null) {
+            txtNombre.setText(traerDatos.getNombre());
+            txtApellido.setText(traerDatos.getApellido());
+            txtNombreUsuario.setText(traerDatos.getNombreUsuario());
+
+            switch (traerDatos.getRol_Id()) {
+                case 1:
+                    //Admin
+                    cbRoles.setSelectedIndex(0);
+                    break;
+                case 2:
+                    //Propietario
+                    cbRoles.setSelectedIndex(1);
+                    break;
+                default:
+                    //Empleado
+                    cbRoles.setSelectedIndex(2);
+                    break;
+            }
+        } 
+
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
 
+        limpiarCampos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+
+        UsuariosDTO nuevoUsuario = new UsuariosDTO();
+        String nombre, apellido, usuarioN, clave, confirmacion;
+        nombre = txtNombre.getText();
+        apellido = txtApellido.getText();
+        usuarioN = txtNombreUsuario.getText();
+        int rol;
+        clave = new String(txtClave.getPassword());
+        confirmacion = new String(txtConfirmacion.getPassword());
+
+        if (nombre.isEmpty() || apellido.isEmpty() || usuarioN.isEmpty() || clave.isEmpty() || confirmacion.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+        } else if (!clave.equals(confirmacion)) {
+            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+        } else {
+            // Los campos de entrada son válidos
+            // Continúa con el procesamiento de los datos
+            switch (cbRoles.getSelectedIndex()) {
+                case 0:
+                    //Admin
+                    rol = 1;
+                    break;
+                case 1:
+                    //Propietario
+                    rol = 2;
+                    break;
+                default:
+                    //Empleado
+                    rol = 3;
+                    break;
+            }
+            nuevoUsuario.setNombre(nombre);
+            nuevoUsuario.setApellido(apellido);
+            nuevoUsuario.setClave(clave);
+            nuevoUsuario.setNombreUsuario(usuarioN);
+            nuevoUsuario.setRol_Id(rol);
+
+            nuevoUsuario.encriptaPassword(nuevoUsuario);
+
+        }
+        limpiarCampos();
+
 
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
 
+        UsuariosDTO nuevoUsuario = new UsuariosDTO();
+        String nombre, apellido, usuarioN, clave, confirmacion;
+        nombre = txtNombre.getText();
+        apellido = txtApellido.getText();
+        usuarioN = txtNombreUsuario.getText();
+        int rol;
+        clave = new String(txtClave.getPassword());
+        confirmacion = new String(txtConfirmacion.getPassword());
+
+        if (nombre.isEmpty() || apellido.isEmpty() || usuarioN.isEmpty() || clave.isEmpty() || confirmacion.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+        } else if (!clave.equals(confirmacion)) {
+            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+        } else {
+            // Los campos de entrada son válidos
+            // Continúa con el procesamiento de los datos
+            switch (cbRoles.getSelectedIndex()) {
+                case 0:
+                    //Admin
+                    rol = 1;
+                    break;
+                case 1:
+                    //Propietario
+                    rol = 2;
+                    break;
+                default:
+                    //Empleado
+                    rol = 3;
+                    break;
+            }
+            nuevoUsuario.setNombre(nombre);
+            nuevoUsuario.setApellido(apellido);
+            nuevoUsuario.setClave(clave);
+            nuevoUsuario.setNombreUsuario(usuarioN);
+            nuevoUsuario.setRol_Id(rol);
+
+            nuevoUsuario.update(nuevoUsuario);
+
+        }
+
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
 
+        String idUsuario = txtBuscar_Id.getText();
+
+        if (idUsuario.equals("")) {
+            JOptionPane.showMessageDialog(null, "Debes ingresar un ID de Usuario");
+
+        }
+        UsuarioController controller = new UsuarioController();
+        controller.eliminacion(Integer.parseInt(idUsuario));
+        limpiarCampos();
     }//GEN-LAST:event_btnEliminar1ActionPerformed
+
+    private void txtNombreUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreUsuarioFocusGained
+        // TODO add your handling code here:
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
+        //Generar un numero aleatorio
+        int randomNum = (int) (Math.random() * 101 + (480 / 5));
+
+        // Obtiene la primera palabra del nombre y el apellido para crear el nombre de usuario
+        String nombreUsuario = nombre.split(" ")[0].toLowerCase() + "_" + apellido.split(" ")[0].toLowerCase() + randomNum;
+        txtNombreUsuario.setText(nombreUsuario);
+    }//GEN-LAST:event_txtNombreUsuarioFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -318,11 +497,13 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombreUsuario;
     private javax.swing.JLabel lblRol;
+    private javax.swing.JLabel lbl_IdBucar;
     private javax.swing.JLabel lbl_image;
     private javax.swing.JPanel panelDatosUsuario;
     private javax.swing.JPanel panelTop;
     private javax.swing.JPanel pnlInferior;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtBuscar_Id;
     private javax.swing.JPasswordField txtClave;
     private javax.swing.JPasswordField txtConfirmacion;
     private javax.swing.JTextField txtNombre;

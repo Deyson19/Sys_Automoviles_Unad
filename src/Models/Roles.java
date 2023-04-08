@@ -12,6 +12,9 @@ public class Roles {
     private int idRol;
     private String NombreRol;
 
+    public Roles(){
+        
+    }
     public Roles(int idRol, String NombreRol) {
         this.idRol = idRol;
         this.NombreRol = NombreRol;

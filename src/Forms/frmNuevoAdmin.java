@@ -165,6 +165,7 @@ public class frmNuevoAdmin extends javax.swing.JFrame {
             nAdmin.encriptaPassword(nAdmin);
 
         }
+        limpiezaCampos();
 
 
     }//GEN-LAST:event_btnIngresarActionPerformed

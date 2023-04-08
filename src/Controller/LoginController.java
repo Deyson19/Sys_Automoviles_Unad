@@ -27,7 +27,6 @@ public class LoginController{
         ErroresSistema errorCrear = new ErroresSistema();
         String sql = "SELECT u.username, u.password, u.rol_id FROM users u WHERE u.username = ? AND u.password = ? UNION SELECT ua.username, ua.password, ua.rol_id FROM usersadmin ua WHERE ua.username = ? AND ua.password = ?";
 
-        System.out.println("SQL: "+sql);
         try {
             connConsultar.conectar();
             PreparedStatement stmt = connConsultar.getConexion().prepareStatement(sql);
@@ -38,8 +37,6 @@ public class LoginController{
             stmt.setString(3, consultaUsuario.getUsuario());
             stmt.setString(4, consultaUsuario.getClave());
 
-            System.out.println("User: "+consultaUsuario.getUsuario());
-            System.out.println("Clave: "+consultaUsuario.getClave());
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {

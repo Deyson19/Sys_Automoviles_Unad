@@ -5,6 +5,9 @@ public class Usuarios {
    private int idUsuario;
    private String Nombre,Apellido,NombreUsuario,Clave,Rol_Id;
 
+   public Usuarios(){
+       
+   }
     public Usuarios(int idUsuario, String Nombre, String Apellido, String NombreUsuario, String Clave, String Rol_Id) {
         this.idUsuario = idUsuario;
         this.Nombre = Nombre;
