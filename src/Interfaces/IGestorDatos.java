@@ -12,6 +12,6 @@ package Interfaces;
 public interface IGestorDatos<T> {
     void creacion(T objeto);
     T lectura(int id);
-    void actualizacion(T objeto);
+    void actualizacion(T objeto, int id);
     void eliminacion(int id);
 }

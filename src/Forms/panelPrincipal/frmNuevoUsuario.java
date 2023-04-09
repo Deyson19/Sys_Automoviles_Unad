@@ -414,7 +414,7 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
 
-        UsuariosDTO nuevoUsuario = new UsuariosDTO();
+        UsuariosDTO actualizarUsuario = new UsuariosDTO();
         String nombre, apellido, usuarioN, clave, confirmacion;
         nombre = txtNombre.getText();
         apellido = txtApellido.getText();
@@ -430,27 +430,21 @@ public class frmNuevoUsuario extends javax.swing.JInternalFrame {
         } else {
             // Los campos de entrada son válidos
             // Continúa con el procesamiento de los datos
-            switch (cbRoles.getSelectedIndex()) {
-                case 0:
-                    //Admin
-                    rol = 1;
-                    break;
-                case 1:
-                    //Propietario
-                    rol = 2;
-                    break;
-                default:
-                    //Empleado
-                    rol = 3;
-                    break;
-            }
-            nuevoUsuario.setNombre(nombre);
-            nuevoUsuario.setApellido(apellido);
-            nuevoUsuario.setClave(clave);
-            nuevoUsuario.setNombreUsuario(usuarioN);
-            nuevoUsuario.setRol_Id(rol);
+            rol = switch (cbRoles.getSelectedIndex()) {
+                case 0 -> 1;
+                case 1 -> 2;
+                default -> 3;
+            }; //Admin
+            //Propietario
+            //Empleado
+            actualizarUsuario.setNombre(nombre);
+            actualizarUsuario.setApellido(apellido);
+            actualizarUsuario.setClave(clave);
+            actualizarUsuario.setNombreUsuario(usuarioN);
+            actualizarUsuario.setRol_Id(rol);
+            int idUsuario = Integer.parseInt(txtBuscar_Id.getText());
 
-            nuevoUsuario.update(nuevoUsuario);
+            actualizarUsuario.update(actualizarUsuario,idUsuario);
 
         }
 

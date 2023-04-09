@@ -60,7 +60,7 @@ public class Login implements IEncriptarClave<Login>{
      * @param obj
      */
     @Override
-    public void update(Login obj) {
+    public void update(Login obj,int id) {
         String hashedPassword;
         try {
             hashedPassword = EncriptadorPassword.encrypt(this.clave);
@@ -70,7 +70,6 @@ public class Login implements IEncriptarClave<Login>{
         }
     }
 
-    
     
     
 }

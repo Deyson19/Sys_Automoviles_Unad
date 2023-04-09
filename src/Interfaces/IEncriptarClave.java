@@ -11,5 +11,5 @@ package Interfaces;
  */
 public interface IEncriptarClave<T>{
     public void encriptaPassword(T nU);
-    public void update(T obj);
+    public void update(T obj,int id);
 }

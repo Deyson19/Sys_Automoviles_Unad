@@ -91,7 +91,7 @@ public class UsuariosDTO implements IEncriptarClave<UsuariosDTO>{
     }
 
     @Override
-    public void update(UsuariosDTO obj) {
+    public void update(UsuariosDTO obj,int id) {
         String hashedPassword;
         try {
             hashedPassword = EncriptadorPassword.encrypt(this.Clave);
@@ -100,8 +100,10 @@ public class UsuariosDTO implements IEncriptarClave<UsuariosDTO>{
             Logger.getLogger(UsuariosDTO.class.getName()).log(Level.SEVERE, null, ex);
         }
         UsuarioController usuarioAdC = new UsuarioController();
-        usuarioAdC.actualizacion(obj);
+        usuarioAdC.actualizacion(obj,id);
     }
+
+    
 
     
 }

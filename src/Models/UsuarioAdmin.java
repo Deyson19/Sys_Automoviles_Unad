@@ -62,7 +62,7 @@ public class UsuarioAdmin implements Interfaces.IEncriptarClave<UsuarioAdmin> {
     }
 
     @Override
-    public void update(UsuarioAdmin obj) {
+    public void update(UsuarioAdmin obj,int id) {
         String hashedPassword;
         try {
             hashedPassword = EncriptadorPassword.encrypt(this.password);

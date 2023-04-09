@@ -86,8 +86,27 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
     }
 
     @Override
-    public void actualizacion(UsuariosDTO actualizar) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actualizacion(UsuariosDTO actualizar, int id) {
+        ErroresSistema errorCrear = new ErroresSistema();
+        try {
+            connNewAdmin.conectar();
+            String sql = "update users set name=?,surname=?,username=?,password=?,rol_id=? where idUser ='"+id+"'";
+            PreparedStatement st = connNewAdmin.getConexion().prepareStatement(sql);
+            st.setString(1, actualizar.getNombre());
+            st.setString(2, actualizar.getApellido());
+            st.setString(3, actualizar.getNombreUsuario());
+            st.setString(4, actualizar.getClave());
+            st.setInt(5, actualizar.getRol_Id());
+
+            st.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Datos Actualziados");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al Actualizar");
+            errorCrear.setClaseProveedora(this.getClass().getName());
+            errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            errorCrear.setDescripcionMensaje(e.getMessage());
+            errorCrear.insertarError(errorCrear);
+        }
     }
 
     @Override
