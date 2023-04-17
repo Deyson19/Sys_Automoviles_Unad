@@ -4,6 +4,12 @@
  */
 package Forms.panelPrincipal.Reportes;
 
+import Controller.VehiculosController;
+import DTOs.VehiculosDTO;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Deyson Vente
@@ -15,6 +21,8 @@ public class frmHistorial extends javax.swing.JInternalFrame {
      */
     public frmHistorial() {
         initComponents();
+
+        llenarTabla();
     }
 
     /**
@@ -62,13 +70,10 @@ public class frmHistorial extends javax.swing.JInternalFrame {
 
         tbListarHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Placa", "Tipo de Vehículo", "Estado", "Doc. Propietario", "Fecha Ingreso", "Fecha entrega", "Motivo ingreso", "Costo"
+
             }
         ));
         jScrollPane1.setViewportView(tbListarHistorial);
@@ -98,4 +103,40 @@ public class frmHistorial extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblHistorial;
     private javax.swing.JTable tbListarHistorial;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarTabla() {
+        VehiculosController listadoVehiculosRecuperados = new VehiculosController();
+        List<VehiculosDTO> listadoVehiculos = listadoVehiculosRecuperados.listaCompleta();
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("Placa");
+        modelo.addColumn("Tipo de Vehiculo");
+        modelo.addColumn("Estado");
+        modelo.addColumn("Doc. Propietario");
+        modelo.addColumn("Ingreso");
+        modelo.addColumn("Salida");
+        modelo.addColumn("Motivo");
+        modelo.addColumn("Costo");
+
+        tbListarHistorial.setModel(modelo);
+        for (VehiculosDTO vehiculos : listadoVehiculos) {
+            Object[] fila = new Object[8];
+            fila[0] = vehiculos.getPlaca();
+            fila[1] = vehiculos.getTipoVehiculo_Id();
+            fila[2] = vehiculos.getEstado();
+            fila[3] = vehiculos.getPropietario_Id();
+            fila[4] = vehiculos.getFechaEntrada();
+            fila[5] = vehiculos.getFechaSalida();
+            fila[6] = vehiculos.getRazonIngreso();
+            fila[7] = vehiculos.getCostoServicio();
+            modelo.addRow(fila);
+
+        }
+        tbListarHistorial.setModel(modelo);
+
+        tbListarHistorial.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tbListarHistorial.doLayout();
+        tbListarHistorial.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+    }
+
 }

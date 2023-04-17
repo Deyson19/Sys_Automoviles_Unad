@@ -4,17 +4,41 @@
  */
 package Forms.panelPrincipal;
 
+import Controller.TiposVehiculosController;
+import Controller.VehiculosController;
+import DTOs.VehiculosDTO;
+import Models.TiposVehiculos;
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Deyson Vente
  */
 public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
 
+    private int estadoVehiculo, tipoVehiculo;
+    private String placa, costo, motivo, doc_propietario;
+    private String duracion, turnoGenerado;
+
     /**
      * Creates new form frmNuevoVehiculo
      */
     public frmNuevoVehiculo() {
         initComponents();
+
+        TiposVehiculosController tiposRecuperados = new TiposVehiculosController();
+        List<TiposVehiculos> listadoTipos = tiposRecuperados.listadoTiposVehiculos();
+        for (TiposVehiculos tipos : listadoTipos) {
+            cbxTipoVehiculo.addItem(tipos.getNombre());
+        }
+        generarTurno();
+        txtTurno.setText(String.valueOf(turnoGenerado));
+        validarCombos();
+
     }
 
     /**
@@ -33,7 +57,6 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
         txtPropietarioVehiculo = new javax.swing.JTextField();
         cbxTipoVehiculo = new javax.swing.JComboBox<>();
         lblDocPropietario = new javax.swing.JLabel();
-        txtFechaIngresoV = new javax.swing.JTextField();
         lblMotivoIngresoV = new javax.swing.JLabel();
         lblFechaIngresoV = new javax.swing.JLabel();
         lblEstadoV = new javax.swing.JLabel();
@@ -45,10 +68,13 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
         placaVehiculo = new javax.swing.JLabel();
         lblDuracionServicio = new javax.swing.JLabel();
         txtCostoServicio = new javax.swing.JTextField();
-        txtFechaEntregaV = new javax.swing.JTextField();
         txtMotivoIngresoV = new javax.swing.JTextField();
         lblfechaEntrega = new javax.swing.JLabel();
         cbxEstadoVehiculo = new javax.swing.JComboBox<>();
+        jDateFechaEntrega = new com.toedter.calendar.JDateChooser();
+        jDateFechaIngreso = new com.toedter.calendar.JDateChooser();
+        lbl_IdBucar = new javax.swing.JLabel();
+        txtBuscar_Id = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         pnlInferior = new javax.swing.JPanel();
         btnConsultar = new javax.swing.JButton();
@@ -95,12 +121,9 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
         txtPropietarioVehiculo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         cbxTipoVehiculo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        cbxTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Automóvil", "Camioneta", "Motocarro", "Quads", "Turismo" }));
 
         lblDocPropietario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblDocPropietario.setText("Documento Propietario:");
-
-        txtFechaIngresoV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         lblMotivoIngresoV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblMotivoIngresoV.setText("Motivo de Ingreso:");
@@ -131,13 +154,14 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
 
         txtCostoServicio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        txtFechaEntregaV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
         lblfechaEntrega.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblfechaEntrega.setText("Fecha entrega:");
 
         cbxEstadoVehiculo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cbxEstadoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bueno", "Malo", "Regular" }));
+
+        lbl_IdBucar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_IdBucar.setText("Buscar Id:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -168,33 +192,37 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
                             .addComponent(lblMotivoIngresoV))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFechaIngresoV)
                             .addComponent(txtPropietarioVehiculo, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtMotivoIngresoV))))
+                            .addComponent(txtMotivoIngresoV)
+                            .addComponent(jDateFechaIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCostoServicio)
                     .addComponent(lblfechaEntrega)
                     .addComponent(lblDuracionServicio)
-                    .addComponent(lblTurno))
+                    .addComponent(lblTurno)
+                    .addComponent(lbl_IdBucar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtTurno)
-                        .addGap(18, 18, 18))
-                    .addComponent(txtCostoServicio)
-                    .addComponent(txtFechaEntregaV)
-                    .addComponent(txtDuracionServicio, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(12, 12, 12))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCostoServicio)
+                            .addComponent(txtDuracionServicio, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jDateFechaEntrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTurno))
+                        .addGap(12, 12, 12))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtBuscar_Id)
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFechaEntregaV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblfechaEntrega))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblfechaEntrega)
+                            .addComponent(jDateFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -203,7 +231,11 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
                                 .addComponent(txtDuracionServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblTurno)))
+                            .addComponent(lblTurno))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_IdBucar)
+                            .addComponent(txtBuscar_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(placaVehiculo)
@@ -223,10 +255,10 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
                             .addComponent(lblDocPropietario)
                             .addComponent(txtPropietarioVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFechaIngresoV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFechaIngresoV))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFechaIngresoV)
+                            .addComponent(jDateFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblMotivoIngresoV)
                             .addComponent(txtMotivoIngresoV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -353,24 +385,187 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
 
+        txtPropietarioVehiculo.setEditable(false);
+        String idUsuario = txtBuscar_Id.getText();
+
+        if (idUsuario.equals("")) {
+            JOptionPane.showMessageDialog(null, "Debes ingresar un ID para buscar.", "ATENCIÓN!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        VehiculosController controller = new VehiculosController();
+        VehiculosDTO traerDatos = controller.lectura(Integer.parseInt(idUsuario));
+
+        if (traerDatos != null) {
+            txtPlacaVehiculo.setText(traerDatos.getPlaca());
+            txtCostoServicio.setText(traerDatos.getCostoServicio());
+            txtDuracionServicio.setText(traerDatos.getDuracion());
+            txtMotivoIngresoV.setText(traerDatos.getRazonIngreso());
+            txtPropietarioVehiculo.setText(traerDatos.getPropietario_Id());
+            txtTurno.setText(traerDatos.getTurno());
+
+            switch (traerDatos.getEstado()) {
+                case "Bueno":
+                    cbxEstadoVehiculo.setSelectedIndex(0);
+                    break;
+                case "Malo":
+                    cbxEstadoVehiculo.setSelectedIndex(1);
+                    break;
+                case "Regular":
+                    cbxEstadoVehiculo.setSelectedIndex(2);
+                default:
+                    cbxEstadoVehiculo.setSelectedIndex(0);
+                    break;
+            }
+
+            switch (traerDatos.getTipoVehiculo_Id()) {
+                case "1":
+                    cbxEstadoVehiculo.setSelectedIndex(0);
+                    break;
+                case "2":
+                    cbxEstadoVehiculo.setSelectedIndex(1);
+                    break;
+                case "3":
+                    cbxEstadoVehiculo.setSelectedIndex(2);
+                    break;
+                case "4":
+                    cbxEstadoVehiculo.setSelectedIndex(3);
+                default:
+                    cbxEstadoVehiculo.setSelectedIndex(4);
+                    break;
+            }
+
+            jDateFechaEntrega.setDate(traerDatos.getFechaSalida());
+            jDateFechaIngreso.setDate(traerDatos.getFechaEntrada());
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
 
+        limpiarCampos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
 
+        Date fechaIngreso = jDateFechaIngreso.getDate();
+        Date fechaEntrega = jDateFechaEntrega.getDate();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        VehiculosDTO actualizavehiculo = new VehiculosDTO();
+        VehiculosController nuevoVehiculo = new VehiculosController();
+        placa = txtPlacaVehiculo.getText();
+        costo = txtCostoServicio.getText();
+        doc_propietario = txtPropietarioVehiculo.getText();
+        duracion = txtDuracionServicio.getText();
+
+        actualizavehiculo.setPlaca(placa);
+        actualizavehiculo.setEstado(String.valueOf(estadoVehiculo));
+        actualizavehiculo.setCostoServicio(costo);
+        actualizavehiculo.setDuracion(duracion);
+        actualizavehiculo.setFechaSalida(fechaEntrega);
+        actualizavehiculo.setFechaEntrada(fechaIngreso);
+        actualizavehiculo.setPropietario_Id(doc_propietario);
+        actualizavehiculo.setRazonIngreso(txtMotivoIngresoV.getText());
+        txtTurno.setText(String.valueOf(turnoGenerado));
+        actualizavehiculo.setTurno(turnoGenerado);
+        validarCombos();
+        actualizavehiculo.setTipoVehiculo_Id(String.valueOf(tipoVehiculo));
+
+        validarCampos();
+        nuevoVehiculo.creacion(actualizavehiculo);
+        limpiarCampos();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+
+        Date fechaIngreso = jDateFechaIngreso.getDate();
+        Date fechaEntrega = jDateFechaEntrega.getDate();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        VehiculosDTO ingresarVehiculo = new VehiculosDTO();
+        VehiculosController actualizarVehiculo = new VehiculosController();
+        placa = txtPlacaVehiculo.getText();
+        costo = txtCostoServicio.getText();
+        doc_propietario = txtPropietarioVehiculo.getText();
+        duracion = txtDuracionServicio.getText();
+        var id_actualizar = txtBuscar_Id.getText();
+
+        switch (cbxEstadoVehiculo.getSelectedIndex()) {
+            case 0:
+                estadoVehiculo = 1;
+                break;
+            case 1:
+                estadoVehiculo = 2;
+                break;
+            case 2:
+                estadoVehiculo = 3;
+            default:
+                cbxEstadoVehiculo.setSelectedIndex(0);
+                break;
+        }
+
+        switch (cbxTipoVehiculo.getSelectedIndex()) {
+            case 0:
+                tipoVehiculo = 1;
+                break;
+            case 1:
+                tipoVehiculo = 2;
+                break;
+            case 2:
+                tipoVehiculo = 3;
+                break;
+            case 3:
+                tipoVehiculo = 4;
+            default:
+                tipoVehiculo = 1;
+                break;
+        }
+
+        ingresarVehiculo.setEstado(String.valueOf(estadoVehiculo));
+        ingresarVehiculo.setCostoServicio(costo);
+        ingresarVehiculo.setDuracion(duracion);
+        ingresarVehiculo.setFechaSalida(fechaEntrega);
+        ingresarVehiculo.setFechaEntrada(fechaIngreso);
+        ingresarVehiculo.setRazonIngreso(txtMotivoIngresoV.getText());
+        txtTurno.setText(String.valueOf(turnoGenerado));
+        ingresarVehiculo.setTurno(turnoGenerado);
+        ingresarVehiculo.setTipoVehiculo_Id(String.valueOf(tipoVehiculo));
+
+        validarCampos();
+        actualizarVehiculo.actualizacion(ingresarVehiculo, Integer.parseInt(id_actualizar));
 
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
 
-    }//GEN-LAST:event_btnEliminar1ActionPerformed
+        String idVehiculo = txtBuscar_Id.getText();
 
+        if (idVehiculo.equals("")) {
+            JOptionPane.showMessageDialog(null, "Debes ingresar un ID de Usuario");
+
+        }
+        VehiculosController controller = new VehiculosController();
+        controller.eliminacion(Integer.parseInt(idVehiculo));
+        limpiarCampos();
+    }//GEN-LAST:event_btnEliminar1ActionPerformed
+    void generarTurno() {
+        SecureRandom secureRandom = new SecureRandom();
+
+        for (int i = 1; i <= 10; i++) {
+            int numeroTurno = secureRandom.nextInt(11) + 1;
+            char letraTurno = 'a';
+            for (int j = 1; j < i; j++) {
+                letraTurno++;
+                if (letraTurno > 'c') {
+                    letraTurno = 'a';
+                }
+            }
+            turnoGenerado = Character.toUpperCase(letraTurno) + "-" + numeroTurno;
+            System.out.println("Turno " + letraTurno + "-" + numeroTurno);
+            System.out.println("Turno " + turnoGenerado);
+
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -380,6 +575,8 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cbxEstadoVehiculo;
     private javax.swing.JComboBox<String> cbxTipoVehiculo;
+    private com.toedter.calendar.JDateChooser jDateFechaEntrega;
+    private com.toedter.calendar.JDateChooser jDateFechaIngreso;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -392,16 +589,75 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblMotivoIngresoV;
     private javax.swing.JLabel lblTipoV;
     private javax.swing.JLabel lblTurno;
+    private javax.swing.JLabel lbl_IdBucar;
     private javax.swing.JLabel lblfechaEntrega;
     private javax.swing.JLabel placaVehiculo;
     private javax.swing.JPanel pnlInferior;
+    private javax.swing.JTextField txtBuscar_Id;
     private javax.swing.JTextField txtCostoServicio;
     private javax.swing.JTextField txtDuracionServicio;
-    private javax.swing.JTextField txtFechaEntregaV;
-    private javax.swing.JTextField txtFechaIngresoV;
     private javax.swing.JTextField txtMotivoIngresoV;
     private javax.swing.JTextField txtPlacaVehiculo;
     private javax.swing.JTextField txtPropietarioVehiculo;
     private javax.swing.JTextField txtTurno;
     // End of variables declaration//GEN-END:variables
+
+    private void validarCombos() {
+        switch (cbxEstadoVehiculo.getSelectedIndex()) {
+            case 0:
+                //Bueno
+                estadoVehiculo = 1;
+                break;
+            case 1:
+                //Malo
+                estadoVehiculo = 2;
+                break;
+            default:
+                //Regular
+                estadoVehiculo = 3;
+                break;
+        }
+
+        switch (cbxTipoVehiculo.getSelectedIndex()) {
+            case 0:
+                tipoVehiculo = 1;
+                break;
+            case 1:
+                tipoVehiculo = 2;
+                break;
+            case 2:
+                tipoVehiculo = 3;
+                break;
+            case 3:
+                tipoVehiculo = 4;
+                break;
+            case 4:
+                tipoVehiculo = 5;
+                break;
+            default:
+                //Empleado
+                tipoVehiculo = 1;
+                break;
+        }
+
+    }
+
+    private boolean validarCampos() {
+
+        if (placa.isEmpty() || doc_propietario.isEmpty() || duracion.isEmpty() || costo.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    private void limpiarCampos() {
+        txtCostoServicio.setText("");
+        txtDuracionServicio.setText("");
+        txtTurno.setText("");
+        txtPlacaVehiculo.setText("");
+        txtMotivoIngresoV.setText("");
+    }
 }

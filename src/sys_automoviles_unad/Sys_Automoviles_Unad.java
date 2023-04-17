@@ -4,6 +4,7 @@ import Controller.RolesController;
 import Forms.frmLogin;
 import Models.Roles;
 import Models.UsuarioAdmin;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,11 +19,9 @@ public class Sys_Automoviles_Unad {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-//        frmLogin login = new frmLogin();
-//        login.setLocationRelativeTo(null);
-//        login.setVisible(true);
-        
-
+        frmLogin login = new frmLogin();
+        login.setLocationRelativeTo(null);
+        login.setVisible(true);
     }
 
 }

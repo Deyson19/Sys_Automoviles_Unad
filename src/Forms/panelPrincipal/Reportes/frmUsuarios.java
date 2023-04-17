@@ -4,6 +4,14 @@
  */
 package Forms.panelPrincipal.Reportes;
 
+import Controller.UsuarioController;
+import Controller.VehiculosController;
+import DTOs.UsuariosDTO;
+import DTOs.VehiculosDTO;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Deyson Vente
@@ -15,6 +23,8 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
      */
     public frmUsuarios() {
         initComponents();
+
+        llenarTablas();
     }
 
     /**
@@ -91,7 +101,33 @@ public class frmUsuarios extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+ private void llenarTablas() {
+        UsuarioController listadoUsuariosRecuperados = new UsuarioController();
+        List<UsuariosDTO> listadoUsuarios = listadoUsuariosRecuperados.listaCompleta();
+        DefaultTableModel modelo = new DefaultTableModel();
 
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Apellidos");
+        modelo.addColumn("Rol Asignado");
+        modelo.addColumn("Nombre de Usuario");
+
+        tbListarUsuarios.setModel(modelo);
+        for (UsuariosDTO usuarios : listadoUsuarios) {
+            Object[] fila = new Object[8];
+            fila[0] = usuarios.getNombre();
+            fila[1] = usuarios.getApellido();
+            fila[2] = usuarios.getRol_Id();
+            fila[3] = usuarios.getNombreUsuario();
+
+            modelo.addRow(fila);
+
+        }
+        tbListarUsuarios.setModel(modelo);
+
+        tbListarUsuarios.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tbListarUsuarios.doLayout();
+        tbListarUsuarios.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

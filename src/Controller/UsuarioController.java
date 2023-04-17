@@ -13,7 +13,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -90,7 +92,7 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
         ErroresSistema errorCrear = new ErroresSistema();
         try {
             connNewAdmin.conectar();
-            String sql = "update users set name=?,surname=?,username=?,password=?,rol_id=? where idUser ='"+id+"'";
+            String sql = "update users set name=?,surname=?,username=?,password=?,rol_id=? where idUser ='" + id + "'";
             PreparedStatement st = connNewAdmin.getConexion().prepareStatement(sql);
             st.setString(1, actualizar.getNombre());
             st.setString(2, actualizar.getApellido());
@@ -133,6 +135,42 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
             connNewAdmin.desconectar();
         }
 
+    }
+
+    public List<UsuariosDTO> traerTodosLosUsuarios() {
+        List<UsuariosDTO> listadoUsuarios = new ArrayList<>();
+        ErroresSistema errorListar = new ErroresSistema();
+
+        String sql = "SELECT Name,Surname,username,rol_id FROM users";
+
+        try {
+            connNewAdmin.conectar();
+            PreparedStatement pt = connNewAdmin.getConexion().prepareStatement(sql);
+            ResultSet rs = pt.executeQuery();
+
+            while (rs.next()) {
+                UsuariosDTO usuarios = new UsuariosDTO();
+                usuarios.setNombre(rs.getString("name"));
+                usuarios.setApellido(rs.getString("surname"));
+                usuarios.setNombreUsuario(rs.getString("username"));
+                usuarios.setRol_Id(rs.getInt("rol_id"));
+
+                listadoUsuarios.add(usuarios);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al recuperar: " + this.getClass().getName());
+            errorListar.setClaseProveedora(this.getClass().getName());
+            errorListar.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            errorListar.setDescripcionMensaje(e.getMessage());
+            errorListar.insertarError(errorListar);
+
+            return Collections.emptyList();
+        }
+        return listadoUsuarios;
+    }
+
+    public List<UsuariosDTO> listaCompleta() {
+        return traerTodosLosUsuarios();
     }
 
 }

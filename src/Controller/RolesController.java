@@ -38,8 +38,8 @@ public class RolesController {
 
             while (rs.next()) {
                 Roles rol = new Roles();
-                rol.setNombreRol(rs.getString("rolname"));
                 rol.setIdRol(rs.getInt("idRoles"));
+                rol.setNombreRol(rs.getString("rolname"));
                 roles.add(rol);
             }
             return roles;

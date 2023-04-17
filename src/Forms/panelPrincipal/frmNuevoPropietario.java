@@ -4,6 +4,10 @@
  */
 package Forms.panelPrincipal;
 
+import Controller.PropietarioController;
+import DTOs.PropietarioDTO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Deyson Vente
@@ -29,22 +33,24 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
         panelSuperior = new javax.swing.JPanel();
         lblInformacion = new javax.swing.JLabel();
         panelInformacion = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtNombres = new javax.swing.JTextField();
+        txtApellidos = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtDocumento = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         placaVehiculo = new javax.swing.JLabel();
         placaVehiculo1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txtCartaPropiedad = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         cbxDocumento = new javax.swing.JComboBox<>();
+        lbl_IdBucar = new javax.swing.JLabel();
+        txtBuscar_Id = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         pnlInferior = new javax.swing.JPanel();
         btnConsultar = new javax.swing.JButton();
@@ -112,43 +118,53 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
 
         cbxDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cédula Ciudadanía", "Pasaporte", "Cédula Extranjería" }));
 
+        lbl_IdBucar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_IdBucar.setText("Buscar Id:");
+
         javax.swing.GroupLayout panelInformacionLayout = new javax.swing.GroupLayout(panelInformacion);
         panelInformacion.setLayout(panelInformacionLayout);
         panelInformacionLayout.setHorizontalGroup(
             panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInformacionLayout.createSequentialGroup()
+                .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelInformacionLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(lbl_IdBucar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar_Id))
+                    .addGroup(panelInformacionLayout.createSequentialGroup()
+                        .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelInformacionLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(placaVehiculo)))
+                            .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel8)))
+                        .addGap(12, 12, 12)
+                        .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCartaPropiedad, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDocumento, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombres, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCorreo))))
+                .addGap(20, 20, 20)
                 .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInformacionLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(placaVehiculo)))
-                    .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel8)))
-                .addGap(12, 12, 12)
-                .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
-                    .addComponent(jTextField7)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField3))
-                .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInformacionLayout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(placaVehiculo1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInformacionLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtApellidos))
+                    .addGroup(panelInformacionLayout.createSequentialGroup()
                         .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel7)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbxDocumento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cbxDocumento, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         panelInformacionLayout.setVerticalGroup(
@@ -156,20 +172,20 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
             .addGroup(panelInformacionLayout.createSequentialGroup()
                 .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelInformacionLayout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addComponent(cbxDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCartaPropiedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelInformacionLayout.createSequentialGroup()
                         .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(placaVehiculo1))
                             .addComponent(placaVehiculo, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -177,14 +193,18 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
                         .addGap(12, 12, 12)
                         .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(12, 12, 12)
                         .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
-                .addGap(34, 34, 34))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_IdBucar)
+                    .addComponent(txtBuscar_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pnlInferior.setBackground(new java.awt.Color(0, 153, 153));
@@ -307,21 +327,155 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
 
+        String idUsuario = txtBuscar_Id.getText();
+
+        if (idUsuario.equals("")) {
+            JOptionPane.showMessageDialog(null, "Debes ingresar un ID para buscar.", "ATENCIÓN!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        PropietarioController controller = new PropietarioController();
+        PropietarioDTO traerDatos = controller.lectura(Integer.parseInt(idUsuario));
+
+        if (traerDatos != null) {
+            txtNombres.setText(traerDatos.getNombre());
+            txtApellidos.setText(traerDatos.getApellido());
+            txtDocumento.setText(traerDatos.getCedula());
+            txtDocumento.setEditable(false);
+            txtDireccion.setText(traerDatos.getDireccion());
+            txtCartaPropiedad.setText(traerDatos.getCarta_Propiedad());
+            txtCartaPropiedad.setEditable(false);
+            txtTelefono.setText(traerDatos.getNumeroCelular());
+            txtCorreo.setText(traerDatos.getCorreo());
+            txtCorreo.setEditable(false);
+
+            switch (traerDatos.getTipoDocumento()) {
+                case "Cedula Ciudadania":
+                    cbxDocumento.setSelectedIndex(0);
+                    break;
+                case "Pasaporte":
+                    cbxDocumento.setSelectedIndex(1);
+                    break;
+                case "Cedula Extranjeria":
+                    cbxDocumento.setSelectedIndex(2);
+                    break;
+                default:
+                    System.out.println("Entra aquí porque no toma un dato seleccionado.");
+            }
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
 
+        limpiarCampos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+
+        String nombre, apellidos, telefono, documento, carta_propiedad, correo;
+        String tipoDocumento = null;
+        nombre = txtNombres.getText();
+        apellidos = txtApellidos.getText();
+        documento = txtDocumento.getText();
+        carta_propiedad = txtCartaPropiedad.getText();
+        telefono = txtTelefono.getText();
+        correo = txtCorreo.getText();
+        if (nombre.isEmpty() || apellidos.isEmpty() || telefono.isEmpty() || documento.isEmpty() || carta_propiedad.isEmpty() || correo.isEmpty()) {
+            limpiarCampos();
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+        } else {
+            // Los campos de entrada son válidos
+            // Continúa con el procesamiento de los datos
+            switch (cbxDocumento.getSelectedIndex()) {
+                case 0:
+                    //Admin
+                    tipoDocumento = "Cedula de Ciudadania";
+                    break;
+                case 1:
+                    //Propietario
+                    tipoDocumento = "Pasaporte";
+                    break;
+                default:
+                    //Empleado
+                    tipoDocumento = "Cedula de Extranjeria";
+                    break;
+            }
+            PropietarioDTO nuevoPropietario = new PropietarioDTO();
+            nuevoPropietario.setNombre(nombre);
+            nuevoPropietario.setApellido(apellidos);
+            nuevoPropietario.setCarta_Propiedad(carta_propiedad);
+            nuevoPropietario.setDireccion(txtDireccion.getText());
+            nuevoPropietario.setCedula(documento);
+            nuevoPropietario.setTipoDocumento(tipoDocumento);
+            nuevoPropietario.setNumeroCelular(telefono);
+            nuevoPropietario.setCorreo(correo);
+
+            PropietarioController ingresarPropietario = new PropietarioController();
+            ingresarPropietario.creacion(nuevoPropietario);
+            limpiarCampos();
+        }
+
 
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
 
+        String nombre, apellidos, telefono;
+        String tipoDocumento = null;
+        nombre = txtNombres.getText();
+        apellidos = txtApellidos.getText();
+        telefono = txtTelefono.getText();
+        if (nombre.isEmpty() || apellidos.isEmpty() || telefono.isEmpty()) {
+            limpiarCampos();
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+        } else {
+            // Los campos de entrada son válidos
+            // Continúa con el procesamiento de los datos
+            switch (cbxDocumento.getSelectedIndex()) {
+                case 0:
+                    //Admin
+                    tipoDocumento = "Cedula de Ciudadania";
+                    break;
+                case 1:
+                    //Propietario
+                    tipoDocumento = "Pasaporte";
+                    break;
+                default:
+                    //Empleado
+                    tipoDocumento = "Cedula de Extranjeria";
+                    break;
+            }
+            PropietarioDTO nuevoPropietario = new PropietarioDTO();
+            nuevoPropietario.setNombre(nombre);
+            nuevoPropietario.setApellido(apellidos);
+            nuevoPropietario.setDireccion(txtDireccion.getText());
+            nuevoPropietario.setTipoDocumento(tipoDocumento);
+            nuevoPropietario.setNumeroCelular(telefono);
+
+            PropietarioController ingresarPropietario = new PropietarioController();
+            int id_propietario = Integer.parseInt(txtBuscar_Id.getText());
+
+            ingresarPropietario.actualizacion(nuevoPropietario, id_propietario);
+            limpiarCampos();
+            habilitarCampos();
+        }
+
+
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
+
+        String idUsuario = txtBuscar_Id.getText();
+
+        if (idUsuario.equals("")) {
+            JOptionPane.showMessageDialog(null, "Debes ingresar un ID de Propietario");
+
+        } else {
+            PropietarioController eliminar = new PropietarioController();
+            eliminar.eliminacion(Integer.parseInt(idUsuario));
+            limpiarCampos();
+            habilitarCampos();
+        }
 
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
@@ -340,18 +494,43 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lblInformacion;
+    private javax.swing.JLabel lbl_IdBucar;
     private javax.swing.JPanel panelInformacion;
     private javax.swing.JPanel panelSuperior;
     private javax.swing.JLabel placaVehiculo;
     private javax.swing.JLabel placaVehiculo1;
     private javax.swing.JPanel pnlInferior;
+    private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtBuscar_Id;
+    private javax.swing.JTextField txtCartaPropiedad;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtDocumento;
+    private javax.swing.JTextField txtNombres;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiarCampos() {
+
+        txtNombres.setText("");
+        txtApellidos.setText("");
+        txtDocumento.setText("");
+        txtDireccion.setText("");
+        txtCartaPropiedad.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+        txtBuscar_Id.setText("");
+        txtCartaPropiedad.setText("");
+        cbxDocumento.setSelectedIndex(0);
+        txtDocumento.setText("");
+        txtCorreo.setText("");
+
+    }
+
+    void habilitarCampos() {
+        txtCartaPropiedad.setEditable(true);
+        txtCorreo.setEditable(true);
+        txtDocumento.setEditable(true);
+    }
 }
