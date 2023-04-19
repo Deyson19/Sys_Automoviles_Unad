@@ -111,8 +111,8 @@ public class frmHistorial extends javax.swing.JInternalFrame {
 
         modelo.addColumn("Placa");
         modelo.addColumn("Tipo de Vehiculo");
-        modelo.addColumn("Estado");
-        modelo.addColumn("Doc. Propietario");
+        modelo.addColumn("Estado ID");
+        modelo.addColumn("Propietario ID");
         modelo.addColumn("Ingreso");
         modelo.addColumn("Salida");
         modelo.addColumn("Motivo");
