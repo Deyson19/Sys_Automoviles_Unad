@@ -5,10 +5,9 @@
 package Controller;
 
 import Configuration.ConexionLocal;
-import Interfaces.IEncriptarClave;
+import Helpers.ConsultasSQL;
 import Models.ErroresSistema;
 import Models.Login;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
@@ -20,18 +19,16 @@ import javax.swing.JOptionPane;
  */
 public class LoginController{
 
-    private Connection cnn;
-    private ConexionLocal connConsultar = new ConexionLocal();
-
+    ConexionLocal connConsultar = ConexionLocal.getInstancia();
+    ErroresSistema errorHaciaSistema = ErroresSistema.getInstanciaErrores();
     public boolean consultarUsuario(Login consultaUsuario) {
-        ErroresSistema errorCrear = new ErroresSistema();
-        String sql = "SELECT u.username, u.password, u.rol_id FROM users u WHERE u.username = ? AND u.password = ? UNION SELECT ua.username, ua.password, ua.rol_id FROM usersadmin ua WHERE ua.username = ? AND ua.password = ?";
+        ErroresSistemaController errorSistema = new ErroresSistemaController();
+        String sql = ConsultasSQL.Login();
 
         try {
             connConsultar.conectar();
             PreparedStatement stmt = connConsultar.getConexion().prepareStatement(sql);
 
-            System.out.println("V: "+stmt);
             stmt.setString(1, consultaUsuario.getUsuario());
             stmt.setString(2, consultaUsuario.getClave());
             stmt.setString(3, consultaUsuario.getUsuario());
@@ -56,17 +53,17 @@ public class LoginController{
             }
 
         } catch (SQLException e) {
-            System.err.println("Error al loguearse el usuario: " + this.getClass().getName());
-            JOptionPane.showMessageDialog(null, "Error al guardar");
-            errorCrear.setClaseProveedora(this.getClass().getName());
-            errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-            errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            JOptionPane.showMessageDialog(null, "Error al iniciar sesión");
+            errorHaciaSistema.setClaseProveedora(this.getClass().getName());
+            errorHaciaSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            errorHaciaSistema.setDescripcionMensaje(e.getMessage());
             
+            errorSistema.NuevoError(errorHaciaSistema);
+            connConsultar.desconectar();
             return false;
+            
         }
 
     }
-
-    
+ 
 }

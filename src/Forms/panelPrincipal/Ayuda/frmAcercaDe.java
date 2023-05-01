@@ -65,7 +65,7 @@ public class frmAcercaDe extends javax.swing.JFrame {
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setText("En este sistema de automóviles puede administrarse a perfección los vehículos que se incresan a un taller. El administrador cuenta con herramientas para administrar los usuarios, los vehículos ingresados y los mismos empleados que tenga el taller. Este es un sistema muy fluido en el que su principal característica es la de ofrecerle al usuario final lo que necesita visualmente para administrar y gestionar las necesidades previamente descritas. ");
@@ -95,8 +95,8 @@ public class frmAcercaDe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

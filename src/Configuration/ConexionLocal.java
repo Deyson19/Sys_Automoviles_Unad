@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Configuration;
 
 import Interfaces.IGestorConexion;
-import Models.ErroresSistema;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,28 +14,24 @@ import javax.swing.JOptionPane;
  */
 public class ConexionLocal implements IGestorConexion {
 
-    private String url = "jdbc:mysql://localhost/db_sys_vehiclesjava";
-    private String usuario = "root";
-    private String clave = "";
+    private final String url = "jdbc:mysql://localhost/db_sys_vehiclesjava";
+    private final String usuario = "root";
+    private final String clave = "";
     private Connection conexion;
 
-    public ErroresSistema errores;
-
-    public ConexionLocal() {
+    private static ConexionLocal instancia;
+    
+    private ConexionLocal() {
 
     }
 
-    public String getUrl() {
-        return url;
+    public static ConexionLocal getInstancia() {
+        if (instancia == null) {
+            instancia = new ConexionLocal();
+        }
+        return instancia;
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public String getClave() {
-        return clave;
-    }
 
     public Connection getConexion() {
         return conexion;

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Controller;
 
 import Configuration.ConexionLocal;
@@ -21,15 +18,14 @@ import javax.swing.JOptionPane;
 public class PropietarioController implements IGestorDatos<PropietarioDTO> {
 
     private Connection cnn;
-    private final ConexionLocal connNewAdmin = new ConexionLocal();
+    private final ConexionLocal connNewAdmin = ConexionLocal.getInstancia();
+    ErroresSistema errorCrear = ErroresSistema.getInstanciaErrores();
+    ErroresSistemaController guardarError = new ErroresSistemaController();
 
     @Override
     public void creacion(PropietarioDTO objeto) {
-        ErroresSistema errorCrear = new ErroresSistema();
-
         try {
             connNewAdmin.conectar();
-
             String sql = "INSERT INTO owners (Cedula,Name,Surname,Ownership_letter,Address,PhoneNumber,Email,Document_type) "
                     + "VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement st = connNewAdmin.getConexion().prepareStatement(sql);
@@ -51,13 +47,13 @@ public class PropietarioController implements IGestorDatos<PropietarioDTO> {
                 errorCrear.setClaseProveedora(this.getClass().getName());
                 errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
                 errorCrear.setDescripcionMensaje(e.getMessage());
-                errorCrear.insertarError(errorCrear);
+                guardarError.NuevoError(errorCrear);
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor comprueba los datos.", "Error al crear", JOptionPane.ERROR_MESSAGE);
                 errorCrear.setClaseProveedora(this.getClass().getName());
                 errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
                 errorCrear.setDescripcionMensaje(e.getMessage());
-                errorCrear.insertarError(errorCrear);
+                guardarError.NuevoError(errorCrear);
             }
 
         } finally {
@@ -67,7 +63,7 @@ public class PropietarioController implements IGestorDatos<PropietarioDTO> {
 
     @Override
     public PropietarioDTO lectura(int id) {
-        ErroresSistema errorCrear = new ErroresSistema();
+        
         String sql = "SELECT Cedula,Name,Surname,Ownership_letter,Address,PhoneNumber,Email,Document_Type FROM owners WHERE idOwner = '" + id + "'";
         PropietarioDTO propietarioEncontrado = null;
 
@@ -97,7 +93,7 @@ public class PropietarioController implements IGestorDatos<PropietarioDTO> {
             errorCrear.setClaseProveedora(this.getClass().getName());
             errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            guardarError.NuevoError(errorCrear);
         } finally {
             connNewAdmin.desconectar();
         }
@@ -107,7 +103,7 @@ public class PropietarioController implements IGestorDatos<PropietarioDTO> {
 
     @Override
     public void actualizacion(PropietarioDTO objeto, int id) {
-        ErroresSistema errorCrear = new ErroresSistema();
+       
         try {
             connNewAdmin.conectar();
             String sql = "update owners set Name=?,Surname=?,Address=?,PhoneNumber=? where idOwner='" + id + "'";
@@ -123,7 +119,7 @@ public class PropietarioController implements IGestorDatos<PropietarioDTO> {
             errorCrear.setClaseProveedora(this.getClass().getName());
             errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            guardarError.NuevoError(errorCrear);
         } finally {
             connNewAdmin.desconectar();
         }
@@ -131,9 +127,7 @@ public class PropietarioController implements IGestorDatos<PropietarioDTO> {
 
     @Override
     public void eliminacion(int id) {
-        ErroresSistema errorCrear = new ErroresSistema();
         String sql = "Delete FROM owners WHERE idOwner = '" + id + "'";
-
         try {
             connNewAdmin.conectar();
             PreparedStatement stmt = connNewAdmin.getConexion().prepareStatement(sql);
@@ -148,7 +142,7 @@ public class PropietarioController implements IGestorDatos<PropietarioDTO> {
             errorCrear.setClaseProveedora(this.getClass().getName());
             errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            guardarError.NuevoError(errorCrear);
         } finally {
             connNewAdmin.desconectar();
         }

@@ -563,6 +563,7 @@ public class frmNuevoVehiculo extends javax.swing.JInternalFrame {
             turnoGenerado = Character.toUpperCase(letraTurno) + "-" + numeroTurno;
             System.out.println("Turno " + letraTurno + "-" + numeroTurno);
             System.out.println("Turno " + turnoGenerado);
+            
 
         }
     }

@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Models;
 
-import Configuration.EncriptadorPassword;
+import Controller.ErroresSistemaController;
+import Helpers.EncriptadorPassword;
 import Controller.LoginController;
 import Interfaces.IEncriptarClave;
 import java.security.NoSuchAlgorithmException;
@@ -15,8 +12,11 @@ import java.util.logging.Logger;
  *
  * @author Deyson Vente
  */
-public class Login implements IEncriptarClave<Login>{
-    private String usuario,clave;
+public class Login implements IEncriptarClave<Login> {
+
+    private String usuario, clave;
+    ErroresSistema errorSistema = ErroresSistema.getInstanciaErrores();
+    ErroresSistemaController guardarError = new ErroresSistemaController();
 
     public Login() {
     }
@@ -45,11 +45,12 @@ public class Login implements IEncriptarClave<Login>{
             this.setClave(hashedPassword);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuarioAdmin.class.getName()).log(Level.SEVERE, null, ex);
-            ErroresSistema errorSistema = new ErroresSistema();
+
             errorSistema.setCodigoMensaje("Error en la encriptación de la contraseña");
             errorSistema.setClaseProveedora(this.getClass().getName());
             errorSistema.setDescripcionMensaje(ex.getMessage());
-        }        
+            guardarError.NuevoError(errorSistema);
+        }
         LoginController usuarioAdC = new LoginController();
         usuarioAdC.consultarUsuario(nU);
 
@@ -60,16 +61,19 @@ public class Login implements IEncriptarClave<Login>{
      * @param obj
      */
     @Override
-    public void update(Login obj,int id) {
+    public void update(Login obj, int id) {
         String hashedPassword;
         try {
             hashedPassword = EncriptadorPassword.encrypt(this.clave);
             this.setClave(hashedPassword);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuarioAdmin.class.getName()).log(Level.SEVERE, null, ex);
+
+            errorSistema.setCodigoMensaje("Error en la encriptación de la contraseña");
+            errorSistema.setClaseProveedora(this.getClass().getName());            
+            errorSistema.setDescripcionMensaje(ex.getMessage());
+            guardarError.NuevoError(errorSistema);
         }
     }
 
-    
-    
 }

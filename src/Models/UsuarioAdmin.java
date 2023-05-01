@@ -4,7 +4,8 @@
  */
 package Models;
 
-import Configuration.EncriptadorPassword;
+import Controller.ErroresSistemaController;
+import Helpers.EncriptadorPassword;
 import Controller.UsuarioAdminController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +19,8 @@ public class UsuarioAdmin implements Interfaces.IEncriptarClave<UsuarioAdmin> {
 
     private String usuario, password;
 
+    ErroresSistema errorSistema = ErroresSistema.getInstanciaErrores();
+    ErroresSistemaController guardarError = new ErroresSistemaController();
     public UsuarioAdmin() {
     }
 
@@ -51,10 +54,12 @@ public class UsuarioAdmin implements Interfaces.IEncriptarClave<UsuarioAdmin> {
             this.setPassword(hashedPassword);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuarioAdmin.class.getName()).log(Level.SEVERE, null, ex);
-            ErroresSistema errorSistema = new ErroresSistema();
+            
             errorSistema.setCodigoMensaje("Error en la encriptación de la contraseña");
             errorSistema.setClaseProveedora(this.getClass().getName());
             errorSistema.setDescripcionMensaje(ex.getMessage());
+            
+            guardarError.NuevoError(errorSistema);
         }        
         UsuarioAdminController usuarioAdC = new UsuarioAdminController();
         usuarioAdC.creacion(nU);
@@ -69,6 +74,12 @@ public class UsuarioAdmin implements Interfaces.IEncriptarClave<UsuarioAdmin> {
             this.setPassword(hashedPassword);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuarioAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            
+            errorSistema.setCodigoMensaje("Error en la encriptación de la contraseña");
+            errorSistema.setClaseProveedora(this.getClass().getName());
+            errorSistema.setDescripcionMensaje(ex.getMessage());
+            
+            guardarError.NuevoError(errorSistema);
         }
     }
 

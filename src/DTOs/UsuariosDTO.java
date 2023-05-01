@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package DTOs;
 
-import Configuration.EncriptadorPassword;
+import Controller.ErroresSistemaController;
+import Helpers.EncriptadorPassword;
 import Controller.UsuarioController;
 import Interfaces.IEncriptarClave;
 import Models.ErroresSistema;
@@ -20,6 +18,9 @@ public class UsuariosDTO implements IEncriptarClave<UsuariosDTO>{
 
     private String Nombre, Apellido, NombreUsuario, Clave;
     private int Rol_Id;
+    
+    ErroresSistema errorSistema = ErroresSistema.getInstanciaErrores();
+    ErroresSistemaController guardarError = new ErroresSistemaController();
 
     public UsuariosDTO() {
     }
@@ -81,10 +82,10 @@ public class UsuariosDTO implements IEncriptarClave<UsuariosDTO>{
             this.setClave(hashedPassword);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuariosDTO.class.getName()).log(Level.SEVERE, null, ex);
-            ErroresSistema errorSistema = new ErroresSistema();
             errorSistema.setCodigoMensaje("Error en la encriptación de la contraseña");
             errorSistema.setClaseProveedora(this.getClass().getName());
             errorSistema.setDescripcionMensaje(ex.getMessage());
+            guardarError.NuevoError(errorSistema);
         }        
         UsuarioController usuarioAdC = new UsuarioController();
         usuarioAdC.creacion(nU);
@@ -98,6 +99,10 @@ public class UsuariosDTO implements IEncriptarClave<UsuariosDTO>{
             this.setClave(hashedPassword);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuariosDTO.class.getName()).log(Level.SEVERE, null, ex);
+            errorSistema.setCodigoMensaje("Error en la encriptación de la contraseña");
+            errorSistema.setClaseProveedora(this.getClass().getName());
+            errorSistema.setDescripcionMensaje(ex.getMessage());
+            guardarError.NuevoError(errorSistema);
         }
         UsuarioController usuarioAdC = new UsuarioController();
         usuarioAdC.actualizacion(obj,id);

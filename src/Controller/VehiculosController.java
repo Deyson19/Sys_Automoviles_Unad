@@ -8,8 +8,6 @@ import Configuration.ConexionLocal;
 import DTOs.VehiculosDTO;
 import Interfaces.IGestorDatos;
 import Models.ErroresSistema;
-import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,14 +20,14 @@ import javax.swing.JOptionPane;
  */
 public class VehiculosController implements IGestorDatos<VehiculosDTO> {
 
-    private Connection cnn;
-    private final ConexionLocal connNewAdmin = new ConexionLocal();
+    private final ConexionLocal connNewAdmin = ConexionLocal.getInstancia();
+    ErroresSistema erroresSistema = ErroresSistema.getInstanciaErrores();
+    ErroresSistemaController guardarError = new ErroresSistemaController();
 
-    private VehiculosDTO recuperarTodo = new VehiculosDTO();
+    private final VehiculosDTO recuperarTodo = new VehiculosDTO();
 
     public List<VehiculosDTO> traerTodosLosVehiculos() {
         List<VehiculosDTO> listadoVehiculos = new ArrayList<>();
-        ErroresSistema errorListar = new ErroresSistema();
 
         String sql = "SELECT Plate,VehicleType_Id,Status,Owner_Id,Date_entry,Delivery_Date,Reason_Ingress,Service_Cost FROM vehicles";
 
@@ -44,7 +42,7 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
                 vehiculos.setTipoVehiculo_Id(rs.getString("VehicleType_Id"));
                 vehiculos.setEstado(rs.getString("Status"));
                 vehiculos.setPropietario_Id(rs.getString("Owner_Id"));
-                
+
                 vehiculos.setFechaEntrada(rs.getDate("Date_entry"));
                 vehiculos.setFechaSalida(rs.getDate("Delivery_Date"));
                 vehiculos.setRazonIngreso(rs.getString("Reason_Ingress"));
@@ -53,23 +51,22 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al recuperar: " + this.getClass().getName());
-            errorListar.setClaseProveedora(this.getClass().getName());
-            errorListar.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-            errorListar.setDescripcionMensaje(e.getMessage());
-            errorListar.insertarError(errorListar);
+            erroresSistema.setClaseProveedora(this.getClass().getName());
+            erroresSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            erroresSistema.setDescripcionMensaje(e.getMessage());
+            guardarError.NuevoError(erroresSistema);
 
             return Collections.emptyList();
         }
         return listadoVehiculos;
     }
-    
-    public List<VehiculosDTO> listaCompleta(){
+
+    public List<VehiculosDTO> listaCompleta() {
         return traerTodosLosVehiculos();
     }
 
     @Override
     public void creacion(VehiculosDTO objeto) {
-        ErroresSistema errorCrear = new ErroresSistema();
         try {
             connNewAdmin.conectar();
             int idOwner = 0; // Inicializar a un valor por defecto
@@ -106,17 +103,17 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
             JOptionPane.showMessageDialog(null, "Se ha realizado un nuevo registro.", "Datos Guardados", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Por favor comprueba los datos.", "Error al crear", JOptionPane.ERROR_MESSAGE);
-            errorCrear.setClaseProveedora(this.getClass().getName());
-            errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-            errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            erroresSistema.setClaseProveedora(this.getClass().getName());
+            erroresSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            erroresSistema.setDescripcionMensaje(e.getMessage());
+            guardarError.NuevoError(erroresSistema);
             if (e.getErrorCode() == 1452) {
                 // La excepción es una violación de la restricción de clave foránea
                 JOptionPane.showMessageDialog(null, "Por favor comprueba que los datos sean coherentes con un propietario", "Error de clave foránea", JOptionPane.ERROR_MESSAGE);
-                errorCrear.setClaseProveedora(this.getClass().getName());
-                errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-                errorCrear.setDescripcionMensaje(e.getMessage());
-                errorCrear.insertarError(errorCrear);
+                erroresSistema.setClaseProveedora(this.getClass().getName());
+                erroresSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+                erroresSistema.setDescripcionMensaje(e.getMessage());
+                guardarError.NuevoError(erroresSistema);
             }
 
         } finally {
@@ -126,7 +123,6 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
 
     @Override
     public VehiculosDTO lectura(int id) {
-        ErroresSistema errorCrear = new ErroresSistema();
         String sql = "SELECT Plate,Status,Reason_Ingress,Owner_Id,VehicleType_Id,Delivery_Date,Service_cost,Duration,Service_Shift,Date_entry FROM vehicles WHERE idVehicle = '" + id + "'";
         VehiculosDTO vehiculoEncontrado = null;
 
@@ -155,20 +151,18 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al recuperar: " + this.getClass().getName());
-            errorCrear.setClaseProveedora(this.getClass().getName());
-            errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-            errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            erroresSistema.setClaseProveedora(this.getClass().getName());
+            erroresSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            erroresSistema.setDescripcionMensaje(e.getMessage());
+            guardarError.NuevoError(erroresSistema);
         } finally {
             connNewAdmin.desconectar();
         }
-
         return vehiculoEncontrado;
     }
 
     @Override
     public void actualizacion(VehiculosDTO objeto, int id) {
-        ErroresSistema errorCrear = new ErroresSistema();
         try {
             connNewAdmin.conectar();
             String sql = "update vehicles set Status=?,Reason_Ingress=?,VehicleType_Id=?,Delivery_Date=?,Service_cost=?,Duration=?,Date_entry=? where idVehicle ='" + id + "'";
@@ -189,10 +183,10 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
             JOptionPane.showMessageDialog(null, "Datos Actualziados");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al Actualizar");
-            errorCrear.setClaseProveedora(this.getClass().getName());
-            errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-            errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            erroresSistema.setClaseProveedora(this.getClass().getName());
+            erroresSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            erroresSistema.setDescripcionMensaje(e.getMessage());
+            guardarError.NuevoError(erroresSistema);
         } finally {
             connNewAdmin.desconectar();
         }
@@ -200,7 +194,6 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
 
     @Override
     public void eliminacion(int id) {
-        ErroresSistema errorCrear = new ErroresSistema();
         String sql = "Delete FROM vehicles WHERE idVehicle = '" + id + "'";
 
         try {
@@ -214,10 +207,10 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar: " + this.getClass().getName());
-            errorCrear.setClaseProveedora(this.getClass().getName());
-            errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-            errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            erroresSistema.setClaseProveedora(this.getClass().getName());
+            erroresSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            erroresSistema.setDescripcionMensaje(e.getMessage());
+            guardarError.NuevoError(erroresSistema);
         } finally {
             connNewAdmin.desconectar();
         }

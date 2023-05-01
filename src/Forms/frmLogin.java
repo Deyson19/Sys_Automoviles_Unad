@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Forms;
 
 import Configuration.ConexionLocal;
@@ -16,6 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class frmLogin extends javax.swing.JFrame {
 
+    ConexionLocal cnnLocal = ConexionLocal.getInstancia();
     /**
      * Creates new form frmLogin
      */
@@ -54,6 +52,7 @@ public class frmLogin extends javax.swing.JFrame {
         lblIniciarSesion.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         lblIniciarSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIniciarSesion.setText("Iniciar Sesión");
+        lblIniciarSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(255, 255, 51), new java.awt.Color(0, 204, 255)));
 
         btnIngresar.setBackground(new java.awt.Color(102, 255, 255));
         btnIngresar.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
@@ -159,7 +158,7 @@ public class frmLogin extends javax.swing.JFrame {
         consultaUsuario.setClave(clave);
         consultaUsuario.encriptaPassword(consultaUsuario);
         
-        ConexionLocal cnnLocal = new ConexionLocal();
+        
         if (!hacerConsulta.consultarUsuario(consultaUsuario)) {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecto");    
             cnnLocal.desconectar();

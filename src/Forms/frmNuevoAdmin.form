@@ -29,7 +29,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                      <Component id="lblIniciarSesion" pref="332" max="32767" attributes="0"/>
+                      <Component id="lblIniciarSesion" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -123,10 +123,15 @@
     <Component class="javax.swing.JLabel" name="lblIniciarSesion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Yu Gothic UI Semibold" size="18" style="1"/>
+          <Font name="Yu Gothic UI Semibold" size="24" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Crear nuevo usuario administrador"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+            <BevelBorder/>
+          </Border>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnIngresar">

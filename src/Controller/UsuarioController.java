@@ -7,7 +7,6 @@ package Controller;
 import Configuration.ConexionLocal;
 import DTOs.UsuariosDTO;
 import Interfaces.IGestorDatos;
-import java.sql.Connection;
 import Models.ErroresSistema;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,12 +23,12 @@ import javax.swing.JOptionPane;
  */
 public class UsuarioController implements IGestorDatos<UsuariosDTO> {
 
-    private Connection cnn;
-    private ConexionLocal connNewAdmin = new ConexionLocal();
+    private ConexionLocal connNewAdmin = ConexionLocal.getInstancia();
+    ErroresSistemaController guardarError = new ErroresSistemaController();
+    ErroresSistema errorSistema = ErroresSistema.getInstanciaErrores();
 
     @Override
     public void creacion(UsuariosDTO u) {
-        ErroresSistema errorCrear = new ErroresSistema();
         try {
             connNewAdmin.conectar();
             String sql = "INSERT INTO users (name,surname,username,password,rol_id) VALUES (?,?,?,?,?)";
@@ -45,16 +44,16 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
         } catch (SQLException e) {
             System.err.println("Error al guardar nuevo usuario: " + this.getClass().getName());
             JOptionPane.showMessageDialog(null, "Error al guardar");
-            errorCrear.setClaseProveedora(this.getClass().getName());
-            errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-            errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            errorSistema.setClaseProveedora(this.getClass().getName());
+            errorSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            errorSistema.setDescripcionMensaje(e.getMessage());
+            guardarError.NuevoError(errorSistema);
         }
     }
 
     @Override
     public UsuariosDTO lectura(int id) {
-        ErroresSistema errorCrear = new ErroresSistema();
+
         String sql = "SELECT idUser,name,surname,username,rol_id FROM users WHERE idUser = '" + id + "'";
         UsuariosDTO usuarioEncontrado = null;
 
@@ -76,10 +75,10 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al recuperar: " + this.getClass().getName());
-            errorCrear.setClaseProveedora(this.getClass().getName());
-            errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-            errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            errorSistema.setClaseProveedora(this.getClass().getName());
+            errorSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            errorSistema.setDescripcionMensaje(e.getMessage());
+            guardarError.NuevoError(errorSistema);
         } finally {
             connNewAdmin.desconectar();
         }
@@ -89,7 +88,7 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
 
     @Override
     public void actualizacion(UsuariosDTO actualizar, int id) {
-        ErroresSistema errorCrear = new ErroresSistema();
+
         try {
             connNewAdmin.conectar();
             String sql = "update users set name=?,surname=?,username=?,password=?,rol_id=? where idUser ='" + id + "'";
@@ -104,16 +103,16 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
             JOptionPane.showMessageDialog(null, "Datos Actualziados");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al Actualizar");
-            errorCrear.setClaseProveedora(this.getClass().getName());
-            errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-            errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            errorSistema.setClaseProveedora(this.getClass().getName());
+            errorSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            errorSistema.setDescripcionMensaje(e.getMessage());
+            guardarError.NuevoError(errorSistema);
         }
     }
 
     @Override
     public void eliminacion(int id) {
-        ErroresSistema errorCrear = new ErroresSistema();
+        
         String sql = "Delete FROM users WHERE idUser = '" + id + "'";
 
         try {
@@ -127,10 +126,10 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar: " + this.getClass().getName());
-            errorCrear.setClaseProveedora(this.getClass().getName());
-            errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-            errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            errorSistema.setClaseProveedora(this.getClass().getName());
+            errorSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            errorSistema.setDescripcionMensaje(e.getMessage());
+            guardarError.NuevoError(errorSistema);
         } finally {
             connNewAdmin.desconectar();
         }
@@ -139,8 +138,7 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
 
     public List<UsuariosDTO> traerTodosLosUsuarios() {
         List<UsuariosDTO> listadoUsuarios = new ArrayList<>();
-        ErroresSistema errorListar = new ErroresSistema();
-
+        
         String sql = "SELECT Name,Surname,username,rol_id FROM users";
 
         try {
@@ -159,10 +157,10 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al recuperar: " + this.getClass().getName());
-            errorListar.setClaseProveedora(this.getClass().getName());
-            errorListar.setCodigoMensaje(String.valueOf(e.getErrorCode()));
-            errorListar.setDescripcionMensaje(e.getMessage());
-            errorListar.insertarError(errorListar);
+            errorSistema.setClaseProveedora(this.getClass().getName());
+            errorSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
+            errorSistema.setDescripcionMensaje(e.getMessage());
+            guardarError.NuevoError(errorSistema);
 
             return Collections.emptyList();
         }

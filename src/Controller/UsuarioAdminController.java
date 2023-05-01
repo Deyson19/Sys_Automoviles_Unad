@@ -7,7 +7,6 @@ package Controller;
 import Configuration.ConexionLocal;
 import Models.ErroresSistema;
 import Models.UsuarioAdmin;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -18,16 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class UsuarioAdminController {
 
-    private Connection cnn;
-    private ConexionLocal connNewAdmin = new ConexionLocal();
-
-    public static void main(String[] args) {
-
-        ConexionLocal connNewAdmin = new ConexionLocal();
-
-        connNewAdmin.testearConexion();
-        
-    }
+    private final ConexionLocal connNewAdmin = ConexionLocal.getInstancia();
 
     public UsuarioAdminController() {
 
@@ -35,7 +25,8 @@ public class UsuarioAdminController {
 
     public void creacion(UsuarioAdmin u) {
         
-        ErroresSistema errorCrear = new ErroresSistema();
+        ErroresSistema errorCrear =ErroresSistema.getInstanciaErrores();
+        ErroresSistemaController guardarError = new ErroresSistemaController();
         try {
             connNewAdmin.conectar();
             String sql = "INSERT INTO usersadmin (userName,password,rol_id) VALUES (?,?,?)";
@@ -52,7 +43,7 @@ public class UsuarioAdminController {
             errorCrear.setClaseProveedora(this.getClass().getName());
             errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            guardarError.NuevoError(errorCrear);
         }
     }
 

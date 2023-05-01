@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import Configuration.ConexionLocal;
 import Models.TiposVehiculos;
 import Models.*;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,21 +17,20 @@ import javax.swing.JOptionPane;
  */
 public class TiposVehiculosController {
 
-    private Connection cnn;
-    private final ConexionLocal connConsultar = new ConexionLocal();
+    private final ConexionLocal connConsultar = ConexionLocal.getInstancia();
 
-    private TiposVehiculos recuperarTipos = new TiposVehiculos();
+    private final TiposVehiculos recuperarTipos = new TiposVehiculos();
+    ErroresSistema errorRecuperar = ErroresSistema.getInstanciaErrores();
+    ErroresSistemaController guardarError = new ErroresSistemaController();
 
     public List<TiposVehiculos> traerTiposVehiculos() {
         List<TiposVehiculos> tiposVehiculos = new ArrayList<>();
-        ErroresSistema errorRecuperar = new ErroresSistema();
         String sql = "SELECT idVehicleType,nameVehicle FROM vehiclestype ORDER BY idVehicleType";
-
         try {
             connConsultar.conectar();
             PreparedStatement pt = connConsultar.getConexion().prepareStatement(sql);
             ResultSet rs = pt.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 TiposVehiculos vehiculos = new TiposVehiculos();
                 vehiculos.setIdTipoVehiculo(rs.getInt("idVehicleType"));
                 vehiculos.setNombre(rs.getString("nameVehicle"));
@@ -47,14 +41,14 @@ public class TiposVehiculosController {
             errorRecuperar.setClaseProveedora(this.getClass().getName());
             errorRecuperar.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             errorRecuperar.setDescripcionMensaje(e.getMessage());
-            errorRecuperar.insertarError(errorRecuperar);
+            guardarError.NuevoError(errorRecuperar);
 
             return Collections.emptyList();
         }
         return tiposVehiculos;
     }
-    
-    public List<TiposVehiculos> listadoTiposVehiculos(){
+
+    public List<TiposVehiculos> listadoTiposVehiculos() {
         return traerTiposVehiculos();
     }
 }

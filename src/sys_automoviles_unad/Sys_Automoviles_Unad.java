@@ -1,12 +1,7 @@
 package sys_automoviles_unad;
 
-import Controller.RolesController;
 import Forms.frmLogin;
-import Models.Roles;
-import Models.UsuarioAdmin;
-import java.security.SecureRandom;
-import java.util.List;
-import java.util.Scanner;
+import Helpers.ComprobadorServidor;
 
 /**
  *
@@ -14,14 +9,17 @@ import java.util.Scanner;
  */
 public class Sys_Automoviles_Unad {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
+        ComprobadorServidor c = new ComprobadorServidor();
         // TODO code application logic here
-        frmLogin login = new frmLogin();
-        login.setLocationRelativeTo(null);
-        login.setVisible(true);
+        if (c.comprobarConexion()) {
+            frmLogin login = new frmLogin();
+            login.setLocationRelativeTo(null);
+            login.setVisible(true);
+        }else{
+            System.exit(1);
+        }
+
     }
 
 }

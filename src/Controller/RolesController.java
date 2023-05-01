@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import Configuration.ConexionLocal;
@@ -22,13 +18,13 @@ import javax.swing.JOptionPane;
  */
 public class RolesController {
 
-    private Connection cnn;
-    private final ConexionLocal connConsultar = new ConexionLocal();
-    private Roles mostrarRoles = new Roles();
+    private final ConexionLocal connConsultar = ConexionLocal.getInstancia();
+    ErroresSistema errorCrear = ErroresSistema.getInstanciaErrores();
+    ErroresSistemaController errorHaciaControlador = new ErroresSistemaController();
+    private final Roles mostrarRoles = new Roles();
 
     public List<Roles> traerRoles() {
         List<Roles> roles = new ArrayList<>();
-        ErroresSistema errorCrear = new ErroresSistema();
         String sql = "SELECT rolname, idRoles FROM roles ORDER BY idRoles";
 
         try {
@@ -44,11 +40,12 @@ public class RolesController {
             }
             return roles;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al recuperar: " + this.getClass().getName());
+            JOptionPane.showMessageDialog(null, "Error al recuperar roles: " + this.getClass().getName());
             errorCrear.setClaseProveedora(this.getClass().getName());
             errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             errorCrear.setDescripcionMensaje(e.getMessage());
-            errorCrear.insertarError(errorCrear);
+            
+            errorHaciaControlador.NuevoError(errorCrear);
 
             return Collections.emptyList();
         }

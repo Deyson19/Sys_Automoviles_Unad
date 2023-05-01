@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Forms;
 
 import Forms.panelPrincipal.Ayuda.frmAcercaDe;
@@ -11,19 +6,36 @@ import Forms.panelPrincipal.Reportes.frmUsuarios;
 import Forms.panelPrincipal.frmNuevoPropietario;
 import Forms.panelPrincipal.frmNuevoUsuario;
 import Forms.panelPrincipal.frmNuevoVehiculo;
+import java.awt.event.ActionEvent;
+import java.time.LocalDate;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.Timer;
 
 
-/**
- *
- * @author admin
- */
 public class frmPrincipal extends javax.swing.JFrame {
+
+    LocalDate objeto_fecha_actual = LocalDate.now();
+    
 
     /**
      * Creates new form frmPrincipal
      */
     public frmPrincipal() {
         initComponents();
+
+        actualizarHora();
+        // Crear un Timer que llame a la función actualizarHora cada 1 segundo
+        Timer timer = new Timer(1000, (ActionEvent e) -> {
+            actualizarHora();
+        });
+        timer.start();
+
+        lblFechaActual.setText(objeto_fecha_actual.toString());
+
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     /**
@@ -36,6 +48,13 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         dpnEscritorio = new javax.swing.JDesktopPane();
+        panelMostrandoFecha = new javax.swing.JPanel();
+        lblTituloFechaActual = new javax.swing.JLabel();
+        lblFechaActual = new javax.swing.JLabel();
+        lblMostrarHora = new javax.swing.JLabel();
+        lblParaImagenIzquierda = new javax.swing.JLabel();
+        lblParaImagenDerecha = new javax.swing.JLabel();
+        lblImagenIzquierda = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuNuevo = new javax.swing.JMenu();
         mnuNuevo_Usuario = new javax.swing.JMenuItem();
@@ -56,15 +75,99 @@ public class frmPrincipal extends javax.swing.JFrame {
         dpnEscritorio.setMaximumSize(new java.awt.Dimension(1820, 780));
         dpnEscritorio.setPreferredSize(new java.awt.Dimension(956, 468));
 
+        panelMostrandoFecha.setBackground(new java.awt.Color(0, 153, 153));
+        panelMostrandoFecha.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 51), new java.awt.Color(255, 0, 0)));
+        panelMostrandoFecha.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+
+        lblTituloFechaActual.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTituloFechaActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTituloFechaActual.setText("Fecha Actual del Sistema");
+
+        lblFechaActual.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        lblFechaActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFechaActual.setText("muestraFecha");
+
+        javax.swing.GroupLayout panelMostrandoFechaLayout = new javax.swing.GroupLayout(panelMostrandoFecha);
+        panelMostrandoFecha.setLayout(panelMostrandoFechaLayout);
+        panelMostrandoFechaLayout.setHorizontalGroup(
+            panelMostrandoFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMostrandoFechaLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(panelMostrandoFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloFechaActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMostrandoFechaLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(lblFechaActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(40, 40, 40)))
+                .addContainerGap())
+        );
+        panelMostrandoFechaLayout.setVerticalGroup(
+            panelMostrandoFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMostrandoFechaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTituloFechaActual)
+                .addGap(18, 18, 18)
+                .addComponent(lblFechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
+        );
+
+        lblMostrarHora.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblMostrarHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMostrarHora.setText("muestraHoraActual");
+        lblMostrarHora.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 0, 0), new java.awt.Color(255, 153, 0)));
+
+        lblParaImagenIzquierda.setBackground(new java.awt.Color(242, 242, 242));
+        lblParaImagenIzquierda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblParaImagenIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoEmpresaCircular225.png"))); // NOI18N
+
+        lblParaImagenDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/seguro_de_auto.png"))); // NOI18N
+
+        lblImagenIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mantenimiento.png"))); // NOI18N
+
+        dpnEscritorio.setLayer(panelMostrandoFecha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dpnEscritorio.setLayer(lblMostrarHora, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dpnEscritorio.setLayer(lblParaImagenIzquierda, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dpnEscritorio.setLayer(lblParaImagenDerecha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dpnEscritorio.setLayer(lblImagenIzquierda, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout dpnEscritorioLayout = new javax.swing.GroupLayout(dpnEscritorio);
         dpnEscritorio.setLayout(dpnEscritorioLayout);
         dpnEscritorioLayout.setHorizontalGroup(
             dpnEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1038, Short.MAX_VALUE)
+            .addGroup(dpnEscritorioLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(lblImagenIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 246, Short.MAX_VALUE)
+                .addGroup(dpnEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dpnEscritorioLayout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(lblMostrarHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(99, 99, 99))
+                    .addGroup(dpnEscritorioLayout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(lblParaImagenIzquierda, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                        .addGap(95, 95, 95))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpnEscritorioLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(panelMostrandoFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(43, 43, 43)))
+                .addComponent(lblParaImagenDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 246, Short.MAX_VALUE)
+                .addGap(15, 15, 15))
         );
         dpnEscritorioLayout.setVerticalGroup(
             dpnEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 537, Short.MAX_VALUE)
+            .addGroup(dpnEscritorioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dpnEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dpnEscritorioLayout.createSequentialGroup()
+                        .addComponent(panelMostrandoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 33, Short.MAX_VALUE)
+                        .addComponent(lblParaImagenIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(lblMostrarHora, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 16, Short.MAX_VALUE))
+                    .addComponent(lblImagenIzquierda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(lblParaImagenDerecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         mnuNuevo.setText("Nuevo");
@@ -153,7 +256,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dpnEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+            .addComponent(dpnEscritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
         );
 
         pack();
@@ -232,19 +335,34 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmPrincipal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new frmPrincipal().setVisible(true);
         });
+    }
+
+    public void actualizarHora() {
+        // Obtener la hora actual
+        LocalTime horaActual = LocalTime.now();
+
+        // Formatear la hora actual
+        DateTimeFormatter horaFormateada = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String horaActualFormateada = horaActual.format(horaFormateada);
+
+        // Actualizar el texto del JLabel con la hora actualizada
+        lblMostrarHora.setText(horaActualFormateada);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dpnEscritorio;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JLabel lblFechaActual;
+    private javax.swing.JLabel lblImagenIzquierda;
+    private javax.swing.JLabel lblMostrarHora;
+    private javax.swing.JLabel lblParaImagenDerecha;
+    private javax.swing.JLabel lblParaImagenIzquierda;
+    private javax.swing.JLabel lblTituloFechaActual;
     private javax.swing.JMenu mnuAyuda;
     private javax.swing.JMenuItem mnuAyuda_AcercaDe;
     private javax.swing.JMenu mnuNuevo;
@@ -255,5 +373,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnuReportes;
     private javax.swing.JMenuItem mnuReportes_Historial;
     private javax.swing.JMenuItem mnuReportes_Usuarios;
+    private javax.swing.JPanel panelMostrandoFecha;
     // End of variables declaration//GEN-END:variables
+
 }
