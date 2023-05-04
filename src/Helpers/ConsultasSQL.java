@@ -42,4 +42,8 @@ public class ConsultasSQL {
     public static String TraerTodosLosRoles() {
         return "SELECT rolname, idRoles FROM roles ORDER BY idRoles";
     }
+
+    public static String TraerTiposVehiculos() {
+        return "SELECT idVehicleType,nameVehicle FROM vehiclestype ORDER BY idVehicleType";
+    }
 }

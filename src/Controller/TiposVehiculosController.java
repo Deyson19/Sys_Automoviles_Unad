@@ -1,6 +1,7 @@
 package Controller;
 
 import Configuration.ConexionLocal;
+import Helpers.ConsultasSQL;
 import Models.TiposVehiculos;
 import Models.*;
 import java.sql.PreparedStatement;
@@ -25,7 +26,7 @@ public class TiposVehiculosController {
 
     public List<TiposVehiculos> traerTiposVehiculos() {
         List<TiposVehiculos> tiposVehiculos = new ArrayList<>();
-        String sql = "SELECT idVehicleType,nameVehicle FROM vehiclestype ORDER BY idVehicleType";
+        String sql = ConsultasSQL.TraerTiposVehiculos();
         try {
             connConsultar.conectar();
             PreparedStatement pt = connConsultar.getConexion().prepareStatement(sql);
