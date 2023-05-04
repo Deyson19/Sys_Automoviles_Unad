@@ -1,6 +1,7 @@
 package Controller;
 
 import Configuration.ConexionLocal;
+import Helpers.ConsultasSQL;
 import Models.ErroresSistema;
 import Models.Roles;
 import java.util.List;
@@ -25,7 +26,7 @@ public class RolesController {
 
     public List<Roles> traerRoles() {
         List<Roles> roles = new ArrayList<>();
-        String sql = "SELECT rolname, idRoles FROM roles ORDER BY idRoles";
+        String sql = ConsultasSQL.TraerTodosLosRoles();
 
         try {
             connConsultar.conectar();
@@ -44,7 +45,7 @@ public class RolesController {
             errorCrear.setClaseProveedora(this.getClass().getName());
             errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             errorCrear.setDescripcionMensaje(e.getMessage());
-            
+
             errorHaciaControlador.NuevoError(errorCrear);
 
             return Collections.emptyList();

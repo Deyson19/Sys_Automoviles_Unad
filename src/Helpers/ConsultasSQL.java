@@ -38,4 +38,8 @@ public class ConsultasSQL {
     }
 
     // #endregion
+
+    public static String TraerTodosLosRoles() {
+        return "SELECT rolname, idRoles FROM roles ORDER BY idRoles";
+    }
 }
