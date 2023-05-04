@@ -50,6 +50,7 @@ public class LoginController {
             } else {
                 // El usuario y la contraseña no son válidos
                 JOptionPane.showMessageDialog(null, "No hay datos para el usuario ingresado.");
+                connConsultar.desconectar();
                 return false;
             }
 
@@ -64,6 +65,8 @@ public class LoginController {
             connConsultar.desconectar();
             return false;
 
+        }finally{
+            connConsultar.desconectar();
         }
 
     }

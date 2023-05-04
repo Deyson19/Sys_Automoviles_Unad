@@ -1,6 +1,7 @@
 package sys_automoviles_unad;
 
 import Forms.frmLogin;
+import Forms.frmNuevoAdmin;
 import Helpers.ComprobadorServidor;
 
 /**
@@ -14,6 +15,7 @@ public class Sys_Automoviles_Unad {
         // TODO code application logic here
         if (c.comprobarConexion()) {
             frmLogin login = new frmLogin();
+            //frmNuevoAdmin login = new frmNuevoAdmin();
             login.setLocationRelativeTo(null);
             login.setVisible(true);
         }else{

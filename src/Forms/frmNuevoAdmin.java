@@ -2,6 +2,7 @@ package Forms;
 
 import Configuration.ConexionLocal;
 import Controller.UsuarioAdminController;
+import Helpers.ValidarPassword;
 import Models.UsuarioAdmin;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
@@ -12,12 +13,15 @@ import javax.swing.JOptionPane;
  */
 public class frmNuevoAdmin extends javax.swing.JFrame {
 
+    ValidarPassword validarPassword = ValidarPassword.getInstanciaValidarPassword();
+
     public frmNuevoAdmin() {
         initComponents();
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         txtUsuario = new javax.swing.JTextField();
@@ -72,69 +76,92 @@ public class frmNuevoAdmin extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(lblIniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(142, 142, 142))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnIngresar)
-                        .addGap(161, 161, 161))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(imgLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(231, 231, 231))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPassword1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCancelar)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtConfirmaClave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                .addComponent(txtClave, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtUsuario)))
-                        .addGap(152, 152, 152))))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(136, 136, 136)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(13, 13, 13)
+                                                .addComponent(lblIniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(142, 142, 142))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(btnIngresar)
+                                                .addGap(161, 161, 161))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                layout.createSequentialGroup()
+                                                        .addComponent(imgLogin, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(231, 231, 231))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
+                                                .createSequentialGroup()
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblPassword,
+                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(lblUsuario,
+                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(lblPassword1,
+                                                                javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(btnCancelar)
+                                                        .addGroup(layout
+                                                                .createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                        false)
+                                                                .addComponent(txtConfirmaClave,
+                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE, 300,
+                                                                        Short.MAX_VALUE)
+                                                                .addComponent(txtClave,
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(txtUsuario)))
+                                                .addGap(152, 152, 152)))));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(imgLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPassword1)
-                    .addComponent(txtConfirmaClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnIngresar))
-                .addGap(34, 34, 34))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(imgLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 128,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblUsuario))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblPassword))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblPassword1)
+                                        .addComponent(txtConfirmaClave, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29,
+                                        Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnCancelar)
+                                        .addComponent(btnIngresar))
+                                .addGap(34, 34, 34)));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
         UsuarioAdmin nAdmin = new UsuarioAdmin();
         String usuario = txtUsuario.getText().trim();
@@ -142,14 +169,14 @@ public class frmNuevoAdmin extends javax.swing.JFrame {
         String confirmacion = new String(txtConfirmaClave.getPassword());
 
         if (usuario.isEmpty() || clave.isEmpty() || confirmacion.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");  
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
             return;
         } else if (!clave.equals(confirmacion)) {
             JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
             txtConfirmaClave.requestFocus();
             return;
         } else {
-            if (usuario.length()<8) {
+            if (usuario.length() < 8) {
                 JOptionPane.showMessageDialog(rootPane, "Debes ingresar un usuario más largo.");
                 txtUsuario.requestFocus();
                 return;
@@ -158,22 +185,29 @@ public class frmNuevoAdmin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Debes ingresar una contraseña más larga.");
                 txtClave.requestFocus();
                 return;
+            } else {
+                if (validarPassword.Comprueba(clave)) {
+                    // Los campos de entrada son válidos
+                    // Continúa con el procesamiento de los datos
+                    nAdmin.setUsuario(usuario);
+                    nAdmin.setPassword(clave);
+
+                    nAdmin.encriptaPassword(nAdmin);
+                    limpiezaCampos();
+                    return;
+                }
+                JOptionPane.showMessageDialog(null, "Esta contraseña no es segura, ingresa una nueva. Debe incluir signos, letras y/o números.", "Contraseña Insegura", HEIGHT);
             }
-            // Los campos de entrada son válidos
-            // Continúa con el procesamiento de los datos
-            nAdmin.setUsuario(usuario);
-            nAdmin.setPassword(clave);
 
-            nAdmin.encriptaPassword(nAdmin);
         }
-        limpiezaCampos();
 
-    }//GEN-LAST:event_btnIngresarActionPerformed
+    }// GEN-LAST:event_btnIngresarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         limpiezaCampos();
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }// GEN-LAST:event_btnCancelarActionPerformed
+
     void limpiezaCampos() {
         txtUsuario.setText("");
         // Limpiar campos de contraseña de forma segura
@@ -189,9 +223,13 @@ public class frmNuevoAdmin extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -201,16 +239,20 @@ public class frmNuevoAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmNuevoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmNuevoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmNuevoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmNuevoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmNuevoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmNuevoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmNuevoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmNuevoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         }
-        //</editor-fold>
-        //</editor-fold>
+        // </editor-fold>
+        // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {

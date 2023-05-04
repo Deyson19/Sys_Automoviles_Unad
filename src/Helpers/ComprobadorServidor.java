@@ -17,7 +17,7 @@ public class ComprobadorServidor {
             
             // Si la conexión se establece correctamente, cierra el socket y devuelve true
             socket.close();
-            JOptionPane.showMessageDialog(null, "Bienvenido,estas conectado");
+            JOptionPane.showMessageDialog(null,"Bienvenido de nuevo,estas conectado.", "Conectado",JOptionPane.INFORMATION_MESSAGE);
             return true;
         } catch (IOException e) {
             // Si la conexión falla, devuelve false

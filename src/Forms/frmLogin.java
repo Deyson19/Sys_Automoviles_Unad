@@ -160,7 +160,7 @@ public class frmLogin extends javax.swing.JFrame {
         
         
         if (!hacerConsulta.consultarUsuario(consultaUsuario)) {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecto");    
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");    
             cnnLocal.desconectar();
             return;
         }
