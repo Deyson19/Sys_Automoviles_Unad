@@ -6,6 +6,7 @@ package Controller;
 
 import Configuration.ConexionLocal;
 import DTOs.UsuariosDTO;
+import Helpers.ConsultasSQL;
 import Interfaces.IGestorDatos;
 import Models.ErroresSistema;
 import java.sql.Connection;
@@ -31,7 +32,7 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
     public void creacion(UsuariosDTO u) {
         try {
             connNewAdmin.conectar();
-            String sql = "INSERT INTO users (name,surname,username,password,rol_id) VALUES (?,?,?,?,?)";
+            String sql = ConsultasSQL.CrearUsuario();
             PreparedStatement st = connNewAdmin.getConexion().prepareStatement(sql);
             st.setString(1, u.getNombre());
             st.setString(2, u.getApellido());
@@ -48,13 +49,15 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
             errorSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             errorSistema.setDescripcionMensaje(e.getMessage());
             guardarError.NuevoError(errorSistema);
+        } finally {
+            connNewAdmin.desconectar();
         }
     }
 
     @Override
     public UsuariosDTO lectura(int id) {
 
-        String sql = "SELECT idUser,name,surname,username,rol_id FROM users WHERE idUser = '" + id + "'";
+        String sql = ConsultasSQL.ListarUsuario(id);
         UsuariosDTO usuarioEncontrado = null;
 
         try {
@@ -69,7 +72,8 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
                 usuarioEncontrado.setNombreUsuario(rs.getString("username"));
                 usuarioEncontrado.setRol_Id(rs.getInt("rol_id"));
             } else {
-                usuarioEncontrado = new UsuariosDTO(); // inicializar el objeto en caso de que no se encuentre el usuario
+                usuarioEncontrado = new UsuariosDTO(); // inicializar el objeto en caso de que no se encuentre el
+                                                       // usuario
                 JOptionPane.showMessageDialog(null, "No se encontraron datos.");
 
             }
@@ -91,7 +95,7 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
 
         try {
             connNewAdmin.conectar();
-            String sql = "update users set name=?,surname=?,username=?,password=?,rol_id=? where idUser ='" + id + "'";
+            String sql = ConsultasSQL.ActualizarUsuario(id);
             PreparedStatement st = connNewAdmin.getConexion().prepareStatement(sql);
             st.setString(1, actualizar.getNombre());
             st.setString(2, actualizar.getApellido());
@@ -107,13 +111,15 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
             errorSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             errorSistema.setDescripcionMensaje(e.getMessage());
             guardarError.NuevoError(errorSistema);
+        } finally {
+            connNewAdmin.desconectar();
         }
     }
 
     @Override
     public void eliminacion(int id) {
-        
-        String sql = "Delete FROM users WHERE idUser = '" + id + "'";
+
+        String sql = ConsultasSQL.EliminarUsuario(id);
 
         try {
             connNewAdmin.conectar();
@@ -138,8 +144,8 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
 
     public List<UsuariosDTO> traerTodosLosUsuarios() {
         List<UsuariosDTO> listadoUsuarios = new ArrayList<>();
-        
-        String sql = "SELECT Name,Surname,username,rol_id FROM users";
+
+        String sql = ConsultasSQL.TraerTodosLosUsuarios();
 
         try {
             connNewAdmin.conectar();

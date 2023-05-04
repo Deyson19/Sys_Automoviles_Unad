@@ -23,29 +23,30 @@ public class UsuarioAdminController {
 
     }
 
-    public void creacion(UsuarioAdmin u) {
-        
-        ErroresSistema errorCrear =ErroresSistema.getInstanciaErrores();
+    public void creacion(UsuarioAdmin usuarioAdminNuevo) {
+
+        ErroresSistema errorCrear = ErroresSistema.getInstanciaErrores();
         ErroresSistemaController guardarError = new ErroresSistemaController();
         try {
             connNewAdmin.conectar();
             String sql = "INSERT INTO usersadmin (userName,password,rol_id) VALUES (?,?,?)";
             PreparedStatement st = connNewAdmin.getConexion().prepareStatement(sql);
-            st.setString(1,u.getUsuario());
-            st.setString(2, u.getPassword());
+            st.setString(1, usuarioAdminNuevo.getUsuario());
+            st.setString(2, usuarioAdminNuevo.getPassword());
             st.setInt(3, 1);
             st.executeUpdate();
             System.out.println("Registro creado");
             JOptionPane.showMessageDialog(null, "Datos Guardados");
         } catch (SQLException e) {
-            System.err.println("Error al guardar nuevo usuario: "+this.getClass().getName());
+            System.err.println("Error al guardar nuevo usuario: " + this.getClass().getName());
             JOptionPane.showMessageDialog(null, "Error al guardar");
             errorCrear.setClaseProveedora(this.getClass().getName());
             errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             errorCrear.setDescripcionMensaje(e.getMessage());
             guardarError.NuevoError(errorCrear);
+        } finally {
+            connNewAdmin.desconectar();
         }
     }
 
-        
 }

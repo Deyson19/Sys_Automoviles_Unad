@@ -46,4 +46,26 @@ public class ConsultasSQL {
     public static String TraerTiposVehiculos() {
         return "SELECT idVehicleType,nameVehicle FROM vehiclestype ORDER BY idVehicleType";
     }
+
+    // #region Consultas para el UsuarioController
+    public static String CrearUsuario() {
+        return "INSERT INTO users (name,surname,username,password,rol_id) VALUES (?,?,?,?,?)";
+    }
+
+    public static String ActualizarUsuario(int id) {
+        return "update users set name=?,surname=?,username=?,password=?,rol_id=? where idUser ='" + id + "'";
+    }
+
+    public static String EliminarUsuario(int id) {
+        return "delete FROM users WHERE idUser = '" + id + "'";
+    }
+
+    public static String ListarUsuario(int id) {
+
+        return "SELECT idUser,name,surname,username,rol_id FROM users WHERE idUser = '" + id + "'";
+    }
+
+    public static String TraerTodosLosUsuarios() {
+        return "SELECT name,surname,username,rol_id FROM users ORDER BY idUser";
+    }
 }
