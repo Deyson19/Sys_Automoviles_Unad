@@ -3,6 +3,7 @@ package Controller;
 
 import Configuration.ConexionLocal;
 import DTOs.PropietarioDTO;
+import Helpers.ConsultasSQL;
 import Interfaces.IGestorDatos;
 import Models.ErroresSistema;
 import java.sql.Connection;
@@ -17,39 +18,41 @@ import javax.swing.JOptionPane;
  */
 public class PropietarioController implements IGestorDatos<PropietarioDTO> {
 
-    private Connection cnn;
     private final ConexionLocal connNewAdmin = ConexionLocal.getInstancia();
     ErroresSistema errorCrear = ErroresSistema.getInstanciaErrores();
     ErroresSistemaController guardarError = new ErroresSistemaController();
 
     @Override
-    public void creacion(PropietarioDTO objeto) {
+    public void creacion(PropietarioDTO crearPropietario) {
         try {
             connNewAdmin.conectar();
-            String sql = "INSERT INTO owners (Cedula,Name,Surname,Ownership_letter,Address,PhoneNumber,Email,Document_type) "
-                    + "VALUES (?,?,?,?,?,?,?,?)";
+            String sql = ConsultasSQL.CrearPropietario();
             PreparedStatement st = connNewAdmin.getConexion().prepareStatement(sql);
-            st.setString(1, objeto.getCedula());
-            st.setString(2, objeto.getNombre());
-            st.setString(3, objeto.getApellido());
-            st.setString(4, objeto.getCarta_Propiedad());
-            st.setString(5, objeto.getDireccion());
-            st.setString(6, objeto.getNumeroCelular());
-            st.setString(7, objeto.getCorreo());
-            st.setString(8, objeto.getTipoDocumento());
+            st.setString(1, crearPropietario.getCedula());
+            st.setString(2, crearPropietario.getNombre());
+            st.setString(3, crearPropietario.getApellido());
+            st.setString(4, crearPropietario.getCarta_Propiedad());
+            st.setString(5, crearPropietario.getDireccion());
+            st.setString(6, crearPropietario.getNumeroCelular());
+            st.setString(7, crearPropietario.getCorreo());
+            st.setString(8, crearPropietario.getTipoDocumento());
 
             st.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Se ha realizado un nuevo registro.", "Datos Guardados", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se ha realizado un nuevo registro.", "Datos Guardados",
+                    JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             if (e.getErrorCode() == 1452) {
                 // La excepción es una violación de la restricción de clave foránea
-                JOptionPane.showMessageDialog(null, "Por favor comprueba que los datos sean coherentes con un propietario", "Error de clave foránea", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                        "Por favor comprueba que los datos correspondan a un propietario correcto.",
+                        "Error al asociar propietario.", JOptionPane.ERROR_MESSAGE);
                 errorCrear.setClaseProveedora(this.getClass().getName());
                 errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
                 errorCrear.setDescripcionMensaje(e.getMessage());
                 guardarError.NuevoError(errorCrear);
             } else {
-                JOptionPane.showMessageDialog(null, "Por favor comprueba los datos.", "Error al crear", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Por favor comprueba los datos.", "Error al crear",
+                        JOptionPane.ERROR_MESSAGE);
                 errorCrear.setClaseProveedora(this.getClass().getName());
                 errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));
                 errorCrear.setDescripcionMensaje(e.getMessage());
@@ -62,9 +65,9 @@ public class PropietarioController implements IGestorDatos<PropietarioDTO> {
     }
 
     @Override
-    public PropietarioDTO lectura(int id) {
-        
-        String sql = "SELECT Cedula,Name,Surname,Ownership_letter,Address,PhoneNumber,Email,Document_Type FROM owners WHERE idOwner = '" + id + "'";
+    public PropietarioDTO lectura(int idLeePropietario) {
+
+        String sql = ConsultasSQL.ListarPropietario(idLeePropietario);
         PropietarioDTO propietarioEncontrado = null;
 
         try {
@@ -84,7 +87,8 @@ public class PropietarioController implements IGestorDatos<PropietarioDTO> {
                 propietarioEncontrado.setTipoDocumento(rs.getString("Document_type"));
 
             } else {
-                propietarioEncontrado = new PropietarioDTO(); // inicializar el objeto en caso de que no se encuentre el usuario
+                // inicializar el objeto en caso de que no se encuentre el usuario
+                propietarioEncontrado = new PropietarioDTO();
                 JOptionPane.showMessageDialog(null, "No se encontraron datos.");
 
             }
@@ -102,16 +106,16 @@ public class PropietarioController implements IGestorDatos<PropietarioDTO> {
     }
 
     @Override
-    public void actualizacion(PropietarioDTO objeto, int id) {
-       
+    public void actualizacion(PropietarioDTO actualizarPropietario, int idPropietario) {
+
         try {
             connNewAdmin.conectar();
-            String sql = "update owners set Name=?,Surname=?,Address=?,PhoneNumber=? where idOwner='" + id + "'";
+            String sql = ConsultasSQL.ActualizarPropietario(idPropietario);
             PreparedStatement st = connNewAdmin.getConexion().prepareStatement(sql);
-            st.setString(1, objeto.getNombre());
-            st.setString(2, objeto.getApellido());
-            st.setString(3, objeto.getDireccion());
-            st.setString(4, objeto.getNumeroCelular());
+            st.setString(1, actualizarPropietario.getNombre());
+            st.setString(2, actualizarPropietario.getApellido());
+            st.setString(3, actualizarPropietario.getDireccion());
+            st.setString(4, actualizarPropietario.getNumeroCelular());
             st.executeUpdate();
             JOptionPane.showMessageDialog(null, "Datos Actualziados");
         } catch (SQLException e) {
@@ -126,8 +130,8 @@ public class PropietarioController implements IGestorDatos<PropietarioDTO> {
     }
 
     @Override
-    public void eliminacion(int id) {
-        String sql = "Delete FROM owners WHERE idOwner = '" + id + "'";
+    public void eliminacion(int idEliminaPropietario) {
+        String sql = ConsultasSQL.EliminarPropietario(idEliminaPropietario);
         try {
             connNewAdmin.conectar();
             PreparedStatement stmt = connNewAdmin.getConexion().prepareStatement(sql);
