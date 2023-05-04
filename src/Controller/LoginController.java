@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Controller;
 
 import Configuration.ConexionLocal;
@@ -17,14 +14,20 @@ import javax.swing.JOptionPane;
  *
  * @author Deyson Vente
  */
-public class LoginController{
+public class LoginController {
 
+    // #region Objetos para trabajar en la clase. No es necesario crear más
     ConexionLocal connConsultar = ConexionLocal.getInstancia();
     ErroresSistema errorHaciaSistema = ErroresSistema.getInstanciaErrores();
-    public boolean consultarUsuario(Login consultaUsuario) {
-        ErroresSistemaController errorSistema = new ErroresSistemaController();
-        String sql = ConsultasSQL.Login();
+    private String usernameResult, passwordResult, adminUsernameResult, adminPasswordResult;
+    private int rol_idResult;
 
+    ErroresSistemaController errorSistema = new ErroresSistemaController();
+
+    // #endregion
+    public boolean consultarUsuario(Login consultaUsuario) {
+
+        String sql = ConsultasSQL.Login();
         try {
             connConsultar.conectar();
             PreparedStatement stmt = connConsultar.getConexion().prepareStatement(sql);
@@ -35,17 +38,15 @@ public class LoginController{
             stmt.setString(4, consultaUsuario.getClave());
 
             ResultSet rs = stmt.executeQuery();
-
             if (rs.next()) {
                 // El usuario y la contraseña son válidos en ambas tablas
-                // Puede acceder a los campos de la fila de resultados utilizando el método getXXX() apropiado
-                String usernameResult = rs.getString("username");
-                String passwordResult = rs.getString("password");
-                int rol_idResult = rs.getInt("rol_id");
-                String adminUsernameResult = rs.getString("userName");
-                String adminPasswordResult = rs.getString("password");
+                // Puede acceder a los campos de la fila de resultados utilizando el método
+                usernameResult = rs.getString("username");
+                passwordResult = rs.getString("password");
+                rol_idResult = rs.getInt("rol_id");
+                adminUsernameResult = rs.getString("userName");
+                adminPasswordResult = rs.getString("password");
                 return true;
-                // Haga lo que necesite con los resultados aquí
             } else {
                 // El usuario y la contraseña no son válidos
                 JOptionPane.showMessageDialog(null, "No hay datos para el usuario ingresado.");
@@ -57,13 +58,14 @@ public class LoginController{
             errorHaciaSistema.setClaseProveedora(this.getClass().getName());
             errorHaciaSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             errorHaciaSistema.setDescripcionMensaje(e.getMessage());
-            
+
+            // Enviar mensaje al controlador de Errores
             errorSistema.NuevoError(errorHaciaSistema);
             connConsultar.desconectar();
             return false;
-            
+
         }
 
     }
- 
+
 }
