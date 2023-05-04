@@ -48,6 +48,7 @@ public class ConsultasSQL {
     }
 
     // #region Consultas para el UsuarioController
+
     public static String CrearUsuario() {
         return "INSERT INTO users (name,surname,username,password,rol_id) VALUES (?,?,?,?,?)";
     }
@@ -68,4 +69,35 @@ public class ConsultasSQL {
     public static String TraerTodosLosUsuarios() {
         return "SELECT name,surname,username,rol_id FROM users ORDER BY idUser";
     }
+    // #endregion
+
+    // #region Consultas para VehiculosController
+
+    public static String CrearVehiculo() {
+        return "INSERT INTO vehicles (Plate,Status,Reason_Ingress,Owner_Id,VehicleType_Id,Delivery_Date,Service_cost,Duration,Service_Shift,Date_entry) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?)";
+    }
+
+    public static String ActualizarVehiculo(int id) {
+        return "update vehicles set Status=?,Reason_Ingress=?,VehicleType_Id=?,Delivery_Date=?,Service_cost=?,Duration=?,Date_entry=? where idVehicle ='"
+                + id + "'";
+    }
+
+    public static String EliminarVehiculo(int id) {
+        return "Delete FROM vehicles WHERE idVehicle = '" + id + "'";
+    }
+
+    public static String ListarVehiculo(int id) {
+        return "SELECT Plate,Status,Reason_Ingress,Owner_Id,VehicleType_Id,Delivery_Date,Service_cost,Duration,Service_Shift,Date_entry FROM vehicles WHERE idVehicle = '"
+                + id + "'";
+    }
+
+    public static String TraerTodosLosVehiculos() {
+        return "SELECT Plate,VehicleType_Id,Status,Owner_Id,Date_entry,Delivery_Date,Reason_Ingress,Service_Cost FROM vehicles";
+    }
+
+    public static String VerificarPropietario() {
+        return "SELECT idOwner FROM owners WHERE Cedula = ?";
+    }
+    // #endregion
 }

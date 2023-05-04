@@ -6,6 +6,7 @@ package Controller;
 
 import Configuration.ConexionLocal;
 import DTOs.VehiculosDTO;
+import Helpers.ConsultasSQL;
 import Interfaces.IGestorDatos;
 import Models.ErroresSistema;
 import java.sql.PreparedStatement;
@@ -29,7 +30,7 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
     public List<VehiculosDTO> traerTodosLosVehiculos() {
         List<VehiculosDTO> listadoVehiculos = new ArrayList<>();
 
-        String sql = "SELECT Plate,VehicleType_Id,Status,Owner_Id,Date_entry,Delivery_Date,Reason_Ingress,Service_Cost FROM vehicles";
+        String sql = ConsultasSQL.TraerTodosLosVehiculos();
 
         try {
             connNewAdmin.conectar();
@@ -70,7 +71,7 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
         try {
             connNewAdmin.conectar();
             int idOwner = 0; // Inicializar a un valor por defecto
-            String query = "SELECT idOwner FROM owners WHERE Cedula = ?";
+            String query = ConsultasSQL.VerificarPropietario();
             try (PreparedStatement stmt = connNewAdmin.getConexion().prepareStatement(query)) {
                 stmt.setString(1, objeto.getPropietario_Id());
                 try (ResultSet rs = stmt.executeQuery()) {
@@ -81,15 +82,14 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
                     }
                 }
             }
-            String sql = "INSERT INTO vehicles (Plate,Status,Reason_Ingress,Owner_Id,VehicleType_Id,Delivery_Date,Service_cost,Duration,Service_Shift,Date_entry) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String sql = ConsultasSQL.CrearVehiculo();
             PreparedStatement st = connNewAdmin.getConexion().prepareStatement(sql);
             st.setString(1, objeto.getPlaca());
             st.setString(2, objeto.getEstado());
             st.setString(3, objeto.getRazonIngreso());
             st.setString(4, String.valueOf(idOwner));
             st.setString(5, objeto.getTipoVehiculo_Id());
-            //Castear fechas
+            // Castear fechas
             java.sql.Date fecha_salida = new java.sql.Date(objeto.getFechaSalida().getTime());
             java.sql.Date fecha_entrada = new java.sql.Date(objeto.getFechaEntrada().getTime());
 
@@ -100,16 +100,20 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
             st.setDate(10, fecha_entrada);
 
             st.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Se ha realizado un nuevo registro.", "Datos Guardados", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se ha realizado un nuevo registro.", "Datos Guardados",
+                    JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Por favor comprueba los datos.", "Error al crear", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Por favor comprueba los datos.", "Error al crear",
+                    JOptionPane.ERROR_MESSAGE);
             erroresSistema.setClaseProveedora(this.getClass().getName());
             erroresSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
             erroresSistema.setDescripcionMensaje(e.getMessage());
             guardarError.NuevoError(erroresSistema);
             if (e.getErrorCode() == 1452) {
                 // La excepción es una violación de la restricción de clave foránea
-                JOptionPane.showMessageDialog(null, "Por favor comprueba que los datos sean coherentes con un propietario", "Error de clave foránea", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                        "Por favor comprueba que los datos sean coherentes con un propietario",
+                        "Error de clave foránea", JOptionPane.ERROR_MESSAGE);
                 erroresSistema.setClaseProveedora(this.getClass().getName());
                 erroresSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));
                 erroresSistema.setDescripcionMensaje(e.getMessage());
@@ -123,7 +127,7 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
 
     @Override
     public VehiculosDTO lectura(int id) {
-        String sql = "SELECT Plate,Status,Reason_Ingress,Owner_Id,VehicleType_Id,Delivery_Date,Service_cost,Duration,Service_Shift,Date_entry FROM vehicles WHERE idVehicle = '" + id + "'";
+        String sql = ConsultasSQL.ListarVehiculo(id);
         VehiculosDTO vehiculoEncontrado = null;
 
         try {
@@ -145,7 +149,8 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
                 vehiculoEncontrado.setFechaEntrada(rs.getDate("Date_entry"));
 
             } else {
-                vehiculoEncontrado = new VehiculosDTO(); // inicializar el objeto en caso de que no se encuentre el usuario
+                vehiculoEncontrado = new VehiculosDTO(); // inicializar el objeto en caso de que no se encuentre el
+                                                         // usuario
                 JOptionPane.showMessageDialog(null, "No se encontraron datos.");
 
             }
@@ -165,12 +170,12 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
     public void actualizacion(VehiculosDTO objeto, int id) {
         try {
             connNewAdmin.conectar();
-            String sql = "update vehicles set Status=?,Reason_Ingress=?,VehicleType_Id=?,Delivery_Date=?,Service_cost=?,Duration=?,Date_entry=? where idVehicle ='" + id + "'";
+            String sql = ConsultasSQL.ActualizarVehiculo(id);
             PreparedStatement st = connNewAdmin.getConexion().prepareStatement(sql);
             st.setString(1, objeto.getEstado());
             st.setString(2, objeto.getRazonIngreso());
             st.setString(3, objeto.getTipoVehiculo_Id());
-            //Castear fechas
+            // Castear fechas
             java.sql.Date fecha_salida = new java.sql.Date(objeto.getFechaSalida().getTime());
             java.sql.Date fecha_entrada = new java.sql.Date(objeto.getFechaEntrada().getTime());
 
@@ -194,7 +199,7 @@ public class VehiculosController implements IGestorDatos<VehiculosDTO> {
 
     @Override
     public void eliminacion(int id) {
-        String sql = "Delete FROM vehicles WHERE idVehicle = '" + id + "'";
+        String sql = ConsultasSQL.EliminarVehiculo(id);
 
         try {
             connNewAdmin.conectar();
