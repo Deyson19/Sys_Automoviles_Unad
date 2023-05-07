@@ -3,6 +3,7 @@ package Forms;
 
 import Configuration.ConexionLocal;
 import Controller.LoginController;
+import Helpers.MensajesJOP_Errores;
 import Models.Login;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -147,11 +148,11 @@ public class frmLogin extends javax.swing.JFrame {
         String clave = new String(jPasswordField1.getPassword());
 
         if (usuario.equals("")) {
-            JOptionPane.showMessageDialog(this, "Debes ingresar un usuario válido " + usuario);
+            JOptionPane.showMessageDialog(this, MensajesJOP_Errores.Login_UsuarioNoIngresado() + usuario,"Campo Vacío",JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (clave.equals("")) {
-            JOptionPane.showMessageDialog(this, "Debes ingresar una clave válida");
+            JOptionPane.showMessageDialog(this, MensajesJOP_Errores.Login_PasswordVacio(),"Campo Vacío",JOptionPane.ERROR_MESSAGE);
             return;
         }
         consultaUsuario.setUsuario(usuario);
@@ -160,7 +161,7 @@ public class frmLogin extends javax.swing.JFrame {
         
         
         if (!hacerConsulta.consultarUsuario(consultaUsuario)) {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");    
+            JOptionPane.showMessageDialog(this, MensajesJOP_Errores.Login_CamposInvalidos(),"No se puede iniciar sesión.",JOptionPane.ERROR_MESSAGE);    
             cnnLocal.desconectar();
             return;
         }

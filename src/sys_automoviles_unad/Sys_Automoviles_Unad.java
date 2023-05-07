@@ -1,7 +1,6 @@
 package sys_automoviles_unad;
 
 import Forms.frmLogin;
-import Forms.frmNuevoAdmin;
 import Helpers.ComprobadorServidor;
 
 /**

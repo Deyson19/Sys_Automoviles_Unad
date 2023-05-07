@@ -1,4 +1,3 @@
-
 package Configuration;
 
 import Interfaces.IGestorConexion;
@@ -20,7 +19,7 @@ public class ConexionLocal implements IGestorConexion {
     private Connection conexion;
 
     private static ConexionLocal instancia;
-    
+
     private ConexionLocal() {
 
     }
@@ -31,7 +30,6 @@ public class ConexionLocal implements IGestorConexion {
         }
         return instancia;
     }
-
 
     public Connection getConexion() {
         return conexion;
@@ -62,13 +60,9 @@ public class ConexionLocal implements IGestorConexion {
     @Override
     public boolean testearConexion() {
         try {
-            if (conexion != null && !conexion.isClosed()) {
-                return true;
-            } else {
-                return false;
-            }
+            return conexion != null && !conexion.isClosed();
         } catch (SQLException ex) {
-            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);           
             return false;
         }
     }

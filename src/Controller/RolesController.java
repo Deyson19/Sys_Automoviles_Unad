@@ -5,7 +5,6 @@ import Helpers.ConsultasSQL;
 import Models.ErroresSistema;
 import Models.Roles;
 import java.util.List;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -6,7 +6,6 @@ import DTOs.PropietarioDTO;
 import Helpers.ConsultasSQL;
 import Interfaces.IGestorDatos;
 import Models.ErroresSistema;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

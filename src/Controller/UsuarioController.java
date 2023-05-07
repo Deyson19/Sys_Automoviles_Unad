@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Controller;
 
 import Configuration.ConexionLocal;
@@ -9,7 +6,6 @@ import DTOs.UsuariosDTO;
 import Helpers.ConsultasSQL;
 import Interfaces.IGestorDatos;
 import Models.ErroresSistema;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class UsuarioController implements IGestorDatos<UsuariosDTO> {
 
-    private ConexionLocal connNewAdmin = ConexionLocal.getInstancia();
+    private final ConexionLocal connNewAdmin = ConexionLocal.getInstancia();
     ErroresSistemaController guardarError = new ErroresSistemaController();
     ErroresSistema errorSistema = ErroresSistema.getInstanciaErrores();
 

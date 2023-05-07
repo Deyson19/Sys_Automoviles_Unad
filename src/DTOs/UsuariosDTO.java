@@ -107,8 +107,5 @@ public class UsuariosDTO implements IEncriptarClave<UsuariosDTO>{
         UsuarioController usuarioAdC = new UsuarioController();
         usuarioAdC.actualizacion(obj,id);
     }
-
-    
-
     
 }
