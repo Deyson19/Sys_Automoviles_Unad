@@ -25,10 +25,10 @@ public class ValidarPassword {
     public static boolean Comprueba(String password) {
         // Validate a password
         if (PASSWORD_PATTERN.matcher(password).matches()) {
-            System.out.print("Esta contraseña es válida: " + password + " el usuario puede ser creado.\n");
+            //System.out.print("Esta contraseña es válida: " + password + " el usuario puede ser creado.\n");
             return true;
         } else {
-            System.out.print("Lo siento, esta contraseña: " + password + " no cumple los requisitos.\n");
+            //System.out.print("Lo siento, esta contraseña: " + password + " no cumple los requisitos.\n");
             return false;
         }
     }

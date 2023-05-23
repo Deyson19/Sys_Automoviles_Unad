@@ -32,10 +32,10 @@ public class UsuarioAdminController {
             st.setString(2, usuarioAdminNuevo.getPassword());
             st.setInt(3, 1);
             st.executeUpdate();
-            System.out.println("Registro creado");
+            //System.out.println("Registro creado");
             JOptionPane.showMessageDialog(null, "Datos Guardados");
         } catch (SQLException e) {
-            System.err.println("Error al guardar nuevo usuario: " + this.getClass().getName());
+            //System.err.println("Error al guardar nuevo usuario: " + this.getClass().getName());
             JOptionPane.showMessageDialog(null, "Error al guardar");
             errorCrear.setClaseProveedora(this.getClass().getName());
             errorCrear.setCodigoMensaje(String.valueOf(e.getErrorCode()));

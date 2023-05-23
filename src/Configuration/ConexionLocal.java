@@ -40,7 +40,7 @@ public class ConexionLocal implements IGestorConexion {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection(this.url, this.usuario, this.clave);
-            System.out.println("Conectado a la base de datos local");
+            //System.out.println("Conectado a la base de datos local");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ConexionLocal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -51,7 +51,7 @@ public class ConexionLocal implements IGestorConexion {
         conectar();
         try {
             conexion.close();
-            System.out.println("Desconectado de la base de datos local");
+            //System.out.println("Desconectado de la base de datos local");
         } catch (SQLException ex) {
             Logger.getLogger(ConexionLocal.class.getName()).log(Level.SEVERE, null, ex);
         }

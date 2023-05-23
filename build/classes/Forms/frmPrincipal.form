@@ -14,7 +14,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imagenes/usuarios_16.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Usuarios"/>
+                <Property name="text" type="java.lang.String" value="Ingresar Nuevo Usuarios"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuNuevo_UsuarioActionPerformed"/>
@@ -25,7 +25,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imagenes/coche_16.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ingresar Vehiculo"/>
+                <Property name="text" type="java.lang.String" value="Ingresar Nueveo Vehiculo"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuNuevo_VehiculoActionPerformed"/>
@@ -36,7 +36,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imagenes/propietario_16.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nuevo Propietario"/>
+                <Property name="text" type="java.lang.String" value="Ingresar Nuevo Propietario"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuNuevo_PropietarioActionPerformed"/>
@@ -67,7 +67,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imagenes/historial.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Historial"/>
+                <Property name="text" type="java.lang.String" value="Historial Vehiculos"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuReportes_HistorialActionPerformed"/>
@@ -78,7 +78,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imagenes/usuarios_1.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Usuarios"/>
+                <Property name="text" type="java.lang.String" value="Usuarios Registrados"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuReportes_UsuariosActionPerformed"/>

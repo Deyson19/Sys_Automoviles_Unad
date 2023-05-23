@@ -24,11 +24,11 @@ public class ErroresSistemaController {
             // Ejecutar la consulta
             ps.executeUpdate();
             // Cerrar la conexión y la consulta
-            System.out.println("Mensaje guardado desde:" + this.getClass().getName());
+            //System.out.println("Mensaje guardado desde:" + this.getClass().getName());
             miConexion.desconectar();
             return true;
         } catch (SQLException e) {
-            System.out.println("No se pudo guardar el mensaje de error.");
+            //System.out.println("No se pudo guardar el mensaje de error.");
             return false;
         }
     }

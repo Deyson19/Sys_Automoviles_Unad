@@ -173,7 +173,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuNuevo.setText("Nuevo");
 
         mnuNuevo_Usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios_16.png"))); // NOI18N
-        mnuNuevo_Usuario.setText("Usuarios");
+        mnuNuevo_Usuario.setText("Ingresar Nuevo Usuarios");
         mnuNuevo_Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuNuevo_UsuarioActionPerformed(evt);
@@ -182,7 +182,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuNuevo.add(mnuNuevo_Usuario);
 
         mnuNuevo_Vehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/coche_16.png"))); // NOI18N
-        mnuNuevo_Vehiculo.setText("Ingresar Vehiculo");
+        mnuNuevo_Vehiculo.setText("Ingresar Nueveo Vehiculo");
         mnuNuevo_Vehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuNuevo_VehiculoActionPerformed(evt);
@@ -191,7 +191,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuNuevo.add(mnuNuevo_Vehiculo);
 
         mnuNuevo_Propietario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/propietario_16.png"))); // NOI18N
-        mnuNuevo_Propietario.setText("Nuevo Propietario");
+        mnuNuevo_Propietario.setText("Ingresar Nuevo Propietario");
         mnuNuevo_Propietario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuNuevo_PropietarioActionPerformed(evt);
@@ -214,7 +214,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuReportes.setText("Reportes");
 
         mnuReportes_Historial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/historial.png"))); // NOI18N
-        mnuReportes_Historial.setText("Historial");
+        mnuReportes_Historial.setText("Historial Vehiculos");
         mnuReportes_Historial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuReportes_HistorialActionPerformed(evt);
@@ -223,7 +223,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnuReportes.add(mnuReportes_Historial);
 
         mnuReportes_Usuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios_1.png"))); // NOI18N
-        mnuReportes_Usuarios.setText("Usuarios");
+        mnuReportes_Usuarios.setText("Usuarios Registrados");
         mnuReportes_Usuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuReportes_UsuariosActionPerformed(evt);

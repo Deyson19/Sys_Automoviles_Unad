@@ -70,7 +70,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblInformacion" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -115,65 +115,39 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblTipoV" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblEstadoV" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="placaVehiculo" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                                  <Component id="txtPlacaVehiculo" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                                  <Component id="cbxTipoVehiculo" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                                  <Component id="cbxEstadoVehiculo" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblDocPropietario" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblFechaIngresoV" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblMotivoIngresoV" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtPropietarioVehiculo" alignment="1" max="32767" attributes="0"/>
-                              <Component id="txtMotivoIngresoV" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jDateFechaIngreso" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="placaVehiculo" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTipoV" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblEstadoV" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblDocPropietario" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFechaIngresoV" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblMotivoIngresoV" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txtPlacaVehiculo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="cbxTipoVehiculo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="cbxEstadoVehiculo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtPropietarioVehiculo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jDateFechaIngreso" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtMotivoIngresoV" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblCostoServicio" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblfechaEntrega" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblDuracionServicio" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblTurno" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_IdBucar" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblfechaEntrega" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCostoServicio" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblDuracionServicio" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTurno" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_IdBucar" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtCostoServicio" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtDuracionServicio" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jDateFechaEntrega" max="32767" attributes="0"/>
-                              <Component id="txtTurno" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="txtBuscar_Id" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jDateFechaEntrega" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtCostoServicio" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtDuracionServicio" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtTurno" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtBuscar_Id" alignment="0" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

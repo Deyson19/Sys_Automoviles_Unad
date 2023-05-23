@@ -39,7 +39,7 @@ public class UsuarioController implements IGestorDatos<UsuariosDTO> {
             st.executeUpdate();
             JOptionPane.showMessageDialog(null, "Datos Guardados");
         } catch (SQLException e) {
-            System.err.println("Error al guardar nuevo usuario: " + this.getClass().getName());
+            //System.err.println("Error al guardar nuevo usuario: " + this.getClass().getName());
             JOptionPane.showMessageDialog(null, "Error al guardar");
             errorSistema.setClaseProveedora(this.getClass().getName());
             errorSistema.setCodigoMensaje(String.valueOf(e.getErrorCode()));

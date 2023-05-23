@@ -1,8 +1,10 @@
-
 package Forms.panelPrincipal;
 
 import Controller.PropietarioController;
 import DTOs.PropietarioDTO;
+import Helpers.GeneradorCorreos;
+import Helpers.ValidarDireccion;
+import Helpers.ValidarTelefono;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,12 +13,10 @@ import javax.swing.JOptionPane;
  */
 public class frmNuevoPropietario extends javax.swing.JInternalFrame {
 
-   
     public frmNuevoPropietario() {
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -78,16 +78,22 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
             .addGroup(panelSuperiorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblInformacion)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(" Name "));
+        panelInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Necesarios Para Ingresar Propietario"));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Documento:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Dirección:");
+
+        txtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDireccionFocusLost(evt);
+            }
+        });
 
         placaVehiculo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         placaVehiculo.setText("Nombres:");
@@ -98,11 +104,26 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Carta propiedad:");
 
+        txtTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTelefonoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTelefonoFocusLost(evt);
+            }
+        });
+
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Teléfono:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Correo:");
+
+        txtCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCorreoFocusGained(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Tipo documento:");
@@ -117,45 +138,32 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
         panelInformacionLayout.setHorizontalGroup(
             panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInformacionLayout.createSequentialGroup()
-                .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelInformacionLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(lbl_IdBucar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscar_Id))
-                    .addGroup(panelInformacionLayout.createSequentialGroup()
-                        .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelInformacionLayout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(placaVehiculo)))
-                            .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel8)))
-                        .addGap(12, 12, 12)
-                        .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCartaPropiedad, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDocumento, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombres, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCorreo))))
-                .addGap(20, 20, 20)
+                .addGap(5, 5, 5)
                 .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelInformacionLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(placaVehiculo1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtApellidos))
-                    .addGroup(panelInformacionLayout.createSequentialGroup()
-                        .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbxDocumento, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(placaVehiculo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_IdBucar, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNombres)
+                    .addComponent(txtDocumento)
+                    .addComponent(txtCartaPropiedad)
+                    .addComponent(txtCorreo)
+                    .addComponent(txtBuscar_Id))
+                .addGap(21, 21, 21)
+                .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(placaVehiculo1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtApellidos)
+                    .addComponent(cbxDocumento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTelefono)
+                    .addComponent(txtDireccion))
                 .addContainerGap())
         );
         panelInformacionLayout.setVerticalGroup(
@@ -257,7 +265,7 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
                 .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(50, 50, 50)
                 .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEliminar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(17, 17, 17))
         );
@@ -285,7 +293,7 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -363,7 +371,7 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
 
-        String nombre, apellidos, telefono, documento, carta_propiedad, correo;
+        String nombre, apellidos, telefono, documento, carta_propiedad, correo,direccion;
         String tipoDocumento = null;
         nombre = txtNombres.getText();
         apellidos = txtApellidos.getText();
@@ -371,23 +379,20 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
         carta_propiedad = txtCartaPropiedad.getText();
         telefono = txtTelefono.getText();
         correo = txtCorreo.getText();
-        if (nombre.isEmpty() || apellidos.isEmpty() || telefono.isEmpty() || documento.isEmpty() || carta_propiedad.isEmpty() || correo.isEmpty()) {
-            limpiarCampos();
+        direccion = txtDireccion.getText();
+        if (nombre.isEmpty() || apellidos.isEmpty() || telefono.isEmpty() || direccion.isEmpty()|| documento.isEmpty() || carta_propiedad.isEmpty() || correo.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
-        } else {
-            // Los campos de entrada son válidos
-            // Continúa con el procesamiento de los datos
+            limpiarCampos();
+            habilitarCampos();
+        }  else {
             switch (cbxDocumento.getSelectedIndex()) {
                 case 0:
-                    //Admin
                     tipoDocumento = "Cedula de Ciudadania";
                     break;
                 case 1:
-                    //Propietario
                     tipoDocumento = "Pasaporte";
                     break;
                 default:
-                    //Empleado
                     tipoDocumento = "Cedula de Extranjeria";
                     break;
             }
@@ -470,6 +475,48 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
+    private void txtCorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCorreoFocusGained
+        // TODO add your handling code here:
+
+        String nameUser = txtNombres.getText();
+        String surNameUser = txtApellidos.getText();
+
+        GeneradorCorreos nCorreo = new GeneradorCorreos();
+        nCorreo.generarCorreo(nameUser, surNameUser);
+
+        txtCorreo.setText(nCorreo.getCorreoGenerado());
+        txtCorreo.setEditable(false);
+    }//GEN-LAST:event_txtCorreoFocusGained
+
+    private void txtTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefonoFocusGained
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtTelefonoFocusGained
+
+    private void txtTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefonoFocusLost
+        // TODO add your handling code here:
+        String phoneNumber = txtTelefono.getText();
+        ValidarTelefono validatePhone = new ValidarTelefono();
+        validatePhone.validarTelefono(phoneNumber);
+        if (validatePhone.isEsValido()) {
+            System.out.println("Numero es valido");
+            txtTelefono.setEditable(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes ingresar un numero valido");
+        }
+    }//GEN-LAST:event_txtTelefonoFocusLost
+
+    private void txtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusLost
+        // TODO add your handling code here:
+        String address = txtDireccion.getText();
+        ValidarDireccion validarDireccion = ValidarDireccion.getInstanciaUnica();
+        validarDireccion.validarDireccion(address);
+        if (validarDireccion.isEsValido()) {
+            System.out.println("Direccion esta bien");
+            txtDireccion.setEditable(false);
+        }
+    }//GEN-LAST:event_txtDireccionFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -523,5 +570,7 @@ public class frmNuevoPropietario extends javax.swing.JInternalFrame {
         txtCartaPropiedad.setEditable(true);
         txtCorreo.setEditable(true);
         txtDocumento.setEditable(true);
+        txtTelefono.setEditable(true);
+        txtDireccion.setEditable(true);
     }
 }
